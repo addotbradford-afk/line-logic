@@ -1,69 +1,26 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Search and explore Line Logic flight crew training scenarios.">
-  <title>Line Logic Finder</title>
-  <link rel="stylesheet" href="styles.css">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Line Logic Finder</title>
+<link rel="stylesheet" href="styles.css">
 </head>
-<body>
-  <main class="app-shell">
-    <header class="intro">
-      <div>
-        <p class="eyebrow">LINE LOGIC</p>
-        <h1>Find a scenario</h1>
-        <p class="intro-copy">Search by route, threat, technique or competency.</p>
-      </div>
-      <div class="ll-mark" aria-hidden="true"><span>L</span><span>L</span></div>
-    </header>
-
-    <section class="finder" aria-label="Scenario finder">
-      <label class="search-field" for="scenario-search">
-        <span class="sr-only">Search scenarios</span>
-        <span aria-hidden="true" class="search-icon"></span>
-        <input id="scenario-search" type="search" placeholder="Search Line Logic…" autocomplete="off">
-      </label>
-
-      <div class="filter-row">
-        <label>
-          <span>Operational Focus</span>
-          <select id="focus-filter">
-            <option value="">All focus areas</option>
-          </select>
-        </label>
-
-        <fieldset class="competency-filter">
-          <legend>Pilot Competency</legend>
-          <details id="competency-menu">
-            <summary><span id="competency-summary">All competencies</span></summary>
-            <div id="competency-options" class="checkbox-list"></div>
-          </details>
-        </fieldset>
-
-        <button id="clear-filters" class="clear-button" type="button">Clear filters <span aria-hidden="true">×</span></button>
-      </div>
-    </section>
-
-    <div class="results-heading">
-      <p id="result-count" aria-live="polite"></p>
-    </div>
-    <section id="scenario-grid" class="scenario-grid" aria-label="Scenario results"></section>
-    <div id="empty-state" class="empty-state" hidden>
-      <h2>No scenarios found</h2>
-      <p>Try a different search or clear your filters.</p>
-    </div>
-  </main>
-
-  <div id="scenario-modal" class="modal" hidden>
-    <div class="modal-backdrop" data-close-modal></div>
-    <section class="modal-panel" role="dialog" aria-modal="true" aria-labelledby="modal-title" aria-describedby="modal-overview" tabindex="-1">
-      <button class="modal-close" type="button" data-close-modal aria-label="Close scenario preview">×</button>
-      <div id="modal-content"></div>
-    </section>
-  </div>
-
-  <script src="scenarios.js"></script>
-  <script src="app.js"></script>
-</body>
-</html>
+<body><div class="app">
+<div class="search"><input id="q" type="search" aria-label="Search scenarios" placeholder="Search airport, topic, phase, keyword..."><span aria-hidden="true">⌕</span></div>
+<div class="filters">
+<div class="box"><small>OPERATIONAL FOCUS</small><select id="focus"><option value="">All operational areas</option></select></div>
+<div class="box"><small>PILOT COMPETENCY</small><details><summary id="summary">All competencies ▾</summary><div class="menu" id="menu"></div></details></div>
+<button class="clear" id="clear" type="button">CLEAR</button>
+</div>
+<div class="meta"><div class="count" id="count" aria-live="polite"></div><div class="chips" id="chips"></div></div>
+<div class="results" id="results"></div>
+</div>
+<div class="modal" id="modal" hidden>
+<div class="modal-shade" data-close></div>
+<section class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modal-title" tabindex="-1">
+<button class="modal-close" type="button" data-close aria-label="Close scenario preview">×</button>
+<div id="modal-content"></div>
+</section>
+</div>
+<script src="scenarios.js"></script><script src="app.js"></script>
+</body></html>

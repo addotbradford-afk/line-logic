@@ -1,163 +1,41 @@
-(function () {
-  "use strict";
+(function(){
+"use strict";
+const competencies=[["KNO","Knowledge"],["PRO","Application of Procedures"],["COM","Communication"],["FPA","Flight Path Management – Automation"],["FPM","Flight Path Management – Manual"],["LTW","Leadership & Teamwork"],["PSD","Problem Solving & Decision-Making"],["SAW","Situation Awareness"],["WLM","Workload Management"]];
+const scenarios=Array.isArray(window.LINE_LOGIC_SCENARIOS)?window.LINE_LOGIC_SCENARIOS:[];
+const q=document.getElementById("q"),focus=document.getElementById("focus"),menu=document.getElementById("menu"),summary=document.getElementById("summary"),results=document.getElementById("results"),count=document.getElementById("count"),chips=document.getElementById("chips"),modal=document.getElementById("modal"),modalCard=modal.querySelector(".modal-card"),modalContent=document.getElementById("modal-content");
+let previousFocus=null;
+const esc=value=>String(value??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"})[c]);
+const norm=value=>String(value??"").toLowerCase().replace(/[^a-z0-9]+/g," ").trim();
+const dots=level=>`<div class="complexity"><span>Complexity</span>${[1,2,3].map(n=>`<span class="dot ${n<=level?"on":""}" aria-hidden="true"></span>`).join("")}<span class="sr-only">${level} out of 3</span></div>`;
 
-  const scenarios = Array.isArray(window.LINE_LOGIC_SCENARIOS) ? window.LINE_LOGIC_SCENARIOS : [];
-  const searchInput = document.querySelector("#scenario-search");
-  const focusFilter = document.querySelector("#focus-filter");
-  const competencyOptions = document.querySelector("#competency-options");
-  const competencySummary = document.querySelector("#competency-summary");
-  const clearButton = document.querySelector("#clear-filters");
-  const grid = document.querySelector("#scenario-grid");
-  const resultCount = document.querySelector("#result-count");
-  const emptyState = document.querySelector("#empty-state");
-  const modal = document.querySelector("#scenario-modal");
-  const modalPanel = modal.querySelector(".modal-panel");
-  const modalContent = document.querySelector("#modal-content");
-  let lastFocusedElement = null;
+[...new Set(scenarios.flatMap(s=>s.focus||[]))].sort().forEach(f=>{let o=document.createElement("option");o.value=f;o.textContent=f;focus.appendChild(o)});
+competencies.forEach(([c,n])=>{let l=document.createElement("label");l.innerHTML=`<input type="checkbox" value="${c}"><span><b>${c}</b> — ${n}</span>`;menu.appendChild(l)});
+const selected=()=>[...menu.querySelectorAll("input:checked")].map(x=>x.value);
+const text=s=>norm([s.id,s.title,s.location,s.overview,s.safetyData,...(s.focus||[]),...(s.competencies||[]),...(s.keywords||[])].join(" "));
 
-  const escapeHtml = (value) => String(value).replace(/[&<>'"]/g, (character) => ({
-    "&": "&amp;", "<": "&lt;", ">": "&gt;", "'": "&#039;", '"': "&quot;"
-  })[character]);
+function render(){
+ const terms=norm(q.value).split(" ").filter(Boolean),f=focus.value,cs=selected();
+ const list=scenarios.filter(s=>terms.every(term=>text(s).includes(term))&&(!f||(s.focus||[]).includes(f))&&(!cs.length||cs.every(c=>(s.competencies||[]).includes(c))));
+ count.textContent=`${list.length} scenario${list.length===1?"":"s"} found`;summary.textContent=cs.length?cs.join(" · ")+" ▾":"All competencies ▾";
+ chips.innerHTML="";[...(f?[f]:[]),...cs].forEach(x=>{let e=document.createElement("span");e.className="chip";e.textContent=x;chips.appendChild(e)});
+ results.innerHTML=list.length?"":'<div class="empty">No Line Logic scenarios match those filters.</div>';
+ list.forEach(s=>{let d=document.createElement("article");d.className="card";d.tabIndex=0;d.setAttribute("role","button");d.setAttribute("aria-label",`Preview ${s.id}: ${s.title}`);d.dataset.id=s.id;d.innerHTML=`<div class="id">${esc(s.id)}</div><div class="title">${esc(s.title)}</div><div class="loc">${esc(s.location||"")}</div>${dots(s.complexity)}<div class="tags">${(s.focus||[]).map(t=>`<span class="tag">${esc(t)}</span>`).join("")}</div><div class="tags comp" style="margin-top:7px">${(s.competencies||[]).map(t=>`<span class="tag">${esc(t)}</span>`).join("")}</div><span class="open">PREVIEW SCENARIO →</span>`;results.appendChild(d)});
+}
 
-  const normalise = (value) => String(value || "").toLowerCase().replace(/[^a-z0-9]+/g, " ").trim();
-  const uniqueSorted = (items) => [...new Set(items)].sort((a, b) => a.localeCompare(b));
+function openModal(id){
+ const s=scenarios.find(item=>item.id===id);if(!s)return;previousFocus=document.activeElement;
+ const hasUrl=typeof s.url==="string"&&s.url.trim();
+ const explore=hasUrl?`<a class="explore" href="${esc(s.url)}" target="_top">EXPLORE SCENARIO <span>→</span></a>`:`<button class="explore" type="button" disabled>EXPLORE SCENARIO <span class="pending">LINK COMING SOON</span></button>`;
+ modalContent.innerHTML=`<div class="id">${esc(s.id)}</div><div class="title" id="modal-title">${esc(s.title)}</div><div class="loc">${esc(s.location||"")}</div>${dots(s.complexity)}<p class="modal-overview">${esc(s.overview||"")}</p><div class="section-label">OPERATIONAL FOCUS</div><div class="tags">${(s.focus||[]).map(t=>`<span class="tag">${esc(t)}</span>`).join("")}</div><div class="details-grid"><div><div class="section-label">PILOT COMPETENCIES</div><div class="tags comp">${(s.competencies||[]).map(t=>`<span class="tag">${esc(t)}</span>`).join("")}</div></div><div><div class="section-label">SAFETY DATA</div><div class="detail-value">${esc(s.safetyData||"Not specified")}</div></div></div>${explore}`;
+ modal.hidden=false;document.body.classList.add("modal-open");modalCard.focus();
+}
+function closeModal(){if(modal.hidden)return;modal.hidden=true;document.body.classList.remove("modal-open");if(previousFocus)previousFocus.focus()}
 
-  function complexityDots(level) {
-    const safeLevel = Math.max(0, Math.min(3, Number(level) || 0));
-    return `<span class="complexity-dots" aria-label="Complexity ${safeLevel} out of 3">${[1, 2, 3]
-      .map((dot) => `<span class="dot${dot <= safeLevel ? " active" : ""}" aria-hidden="true"></span>`).join("")}</span>`;
-  }
-
-  function populateFilters() {
-    const focuses = uniqueSorted(scenarios.flatMap((scenario) => scenario.focus || []));
-    const competencies = uniqueSorted(scenarios.flatMap((scenario) => scenario.competencies || []));
-    focuses.forEach((focus) => focusFilter.insertAdjacentHTML("beforeend", `<option value="${escapeHtml(focus)}">${escapeHtml(focus)}</option>`));
-    competencyOptions.innerHTML = competencies.map((competency) => `
-      <label><input type="checkbox" value="${escapeHtml(competency)}"> <span>${escapeHtml(competency)}</span></label>
-    `).join("");
-  }
-
-  function selectedCompetencies() {
-    return [...competencyOptions.querySelectorAll("input:checked")].map((input) => input.value);
-  }
-
-  function searchableText(scenario) {
-    return normalise([
-      scenario.ref, scenario.title, scenario.overview, scenario.safetyData,
-      ...(scenario.focus || []), ...(scenario.competencies || []), ...(scenario.keywords || [])
-    ].join(" "));
-  }
-
-  function filteredScenarios() {
-    const terms = normalise(searchInput.value).split(" ").filter(Boolean);
-    const focus = focusFilter.value;
-    const competencies = selectedCompetencies();
-    return scenarios.filter((scenario) => {
-      const haystack = searchableText(scenario);
-      const matchesSearch = terms.every((term) => haystack.includes(term));
-      const matchesFocus = !focus || (scenario.focus || []).includes(focus);
-      const matchesCompetencies = competencies.every((competency) => (scenario.competencies || []).includes(competency));
-      return matchesSearch && matchesFocus && matchesCompetencies;
-    });
-  }
-
-  function renderCard(scenario) {
-    return `
-      <article class="scenario-card" tabindex="0" role="button" data-ref="${escapeHtml(scenario.ref)}" aria-label="Preview ${escapeHtml(scenario.ref)}: ${escapeHtml(scenario.title)}">
-        <div class="card-topline">
-          <span class="reference">${escapeHtml(scenario.ref)}</span>
-          <span class="complexity-label">Complexity ${complexityDots(scenario.complexity)}</span>
-        </div>
-        <h2>${escapeHtml(scenario.title)}</h2>
-        <p>${escapeHtml(scenario.overview)}</p>
-        <div class="tag-list">${(scenario.focus || []).slice(0, 3).map((tag) => `<span>${escapeHtml(tag)}</span>`).join("")}</div>
-        <div class="card-footer">
-          <span>${(scenario.competencies || []).map(escapeHtml).join(" · ")}</span>
-          <span class="preview-link">Preview <span aria-hidden="true">→</span></span>
-        </div>
-      </article>`;
-  }
-
-  function render() {
-    const results = filteredScenarios();
-    resultCount.textContent = `${results.length} ${results.length === 1 ? "scenario" : "scenarios"} found`;
-    grid.innerHTML = results.map(renderCard).join("");
-    emptyState.hidden = results.length !== 0;
-    clearButton.classList.toggle("is-visible", Boolean(searchInput.value || focusFilter.value || selectedCompetencies().length));
-    const selected = selectedCompetencies();
-    competencySummary.textContent = selected.length ? selected.join(", ") : "All competencies";
-  }
-
-  function openModal(ref) {
-    const scenario = scenarios.find((item) => item.ref === ref);
-    if (!scenario) return;
-    lastFocusedElement = document.activeElement;
-    const hasUrl = typeof scenario.url === "string" && scenario.url.trim().length > 0;
-    const explore = hasUrl
-      ? `<a class="explore-button" href="${escapeHtml(scenario.url)}" target="_top">Explore Scenario <span aria-hidden="true">→</span></a>`
-      : `<button class="explore-button" type="button" disabled>Explore Scenario <span class="coming-soon">Link coming soon</span></button>`;
-    modalContent.innerHTML = `
-      <div class="modal-topline">
-        <span class="reference">${escapeHtml(scenario.ref)}</span>
-        <span class="complexity-label">Complexity ${complexityDots(scenario.complexity)}</span>
-      </div>
-      <h2 id="modal-title">${escapeHtml(scenario.title)}</h2>
-      <p id="modal-overview" class="modal-overview">${escapeHtml(scenario.overview)}</p>
-      <div class="detail-block"><h3>Operational focus</h3><div class="tag-list">${(scenario.focus || []).map((tag) => `<span>${escapeHtml(tag)}</span>`).join("")}</div></div>
-      <div class="detail-grid">
-        <div class="detail-block"><h3>Pilot competencies</h3><p>${(scenario.competencies || []).map(escapeHtml).join(" · ") || "Not specified"}</p></div>
-        <div class="detail-block"><h3>Safety data</h3><p>${escapeHtml(scenario.safetyData || "Not specified")}</p></div>
-      </div>
-      ${explore}`;
-    modal.hidden = false;
-    document.body.classList.add("modal-open");
-    modalPanel.focus();
-  }
-
-  function closeModal() {
-    if (modal.hidden) return;
-    modal.hidden = true;
-    document.body.classList.remove("modal-open");
-    if (lastFocusedElement) lastFocusedElement.focus();
-  }
-
-  function clearFilters() {
-    searchInput.value = "";
-    focusFilter.value = "";
-    competencyOptions.querySelectorAll("input").forEach((input) => { input.checked = false; });
-    render();
-    searchInput.focus();
-  }
-
-  populateFilters();
-  render();
-  searchInput.addEventListener("input", render);
-  focusFilter.addEventListener("change", render);
-  competencyOptions.addEventListener("change", render);
-  clearButton.addEventListener("click", clearFilters);
-  grid.addEventListener("click", (event) => {
-    const card = event.target.closest(".scenario-card");
-    if (card) openModal(card.dataset.ref);
-  });
-  grid.addEventListener("keydown", (event) => {
-    const card = event.target.closest(".scenario-card");
-    if (card && (event.key === "Enter" || event.key === " ")) {
-      event.preventDefault();
-      openModal(card.dataset.ref);
-    }
-  });
-  modal.addEventListener("click", (event) => {
-    if (event.target.closest("[data-close-modal]")) closeModal();
-  });
-  document.addEventListener("keydown", (event) => {
-    if (event.key === "Escape") closeModal();
-    if (event.key === "Tab" && !modal.hidden) {
-      const focusable = [...modalPanel.querySelectorAll('button:not([disabled]), a[href], [tabindex]:not([tabindex="-1"])')];
-      if (!focusable.length) return;
-      const first = focusable[0];
-      const last = focusable[focusable.length - 1];
-      if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
-      else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
-    }
-  });
+q.oninput=render;focus.onchange=render;menu.onchange=render;
+document.getElementById("clear").onclick=()=>{q.value="";focus.value="";menu.querySelectorAll("input").forEach(x=>x.checked=false);render()};
+results.addEventListener("click",e=>{const card=e.target.closest(".card");if(card)openModal(card.dataset.id)});
+results.addEventListener("keydown",e=>{const card=e.target.closest(".card");if(card&&(e.key==="Enter"||e.key===" ")){e.preventDefault();openModal(card.dataset.id)}});
+modal.addEventListener("click",e=>{if(e.target.closest("[data-close]"))closeModal()});
+document.addEventListener("keydown",e=>{if(e.key==="Escape")closeModal()});
+render();
 })();
