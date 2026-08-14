@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Line Logic Finder</title>
+<style>
+:root{--pink:#e5007d;--purple:#2e108d;--ink:#171717;--muted:#737783;--line:#e8e8ee;--soft:#f7f7f9}
+*{box-sizing:border-box} body{margin:0;background:transparent;font-family:Arial,Helvetica,sans-serif;color:var(--ink)}
+.app{max-width:1180px;margin:auto;padding:12px}
+.search{position:relative}.search input{width:100%;height:54px;border:1px solid var(--line);border-radius:14px;padding:0 48px 0 18px;font-size:17px;outline:none;background:#fff}
+.search span{position:absolute;right:18px;top:15px;font-size:22px;color:var(--purple)}
+.filters{display:grid;grid-template-columns:1fr 1fr auto;gap:12px;margin-top:12px}
+.box{border:1px solid var(--line);border-radius:14px;background:#fff;padding:9px 12px;min-height:54px}
+.box small{display:block;color:var(--muted);font-size:10px;font-weight:700;letter-spacing:.14em;margin-bottom:5px}
+select{width:100%;border:0;background:transparent;font-size:15px;outline:none}
+details{position:relative} summary{cursor:pointer;list-style:none;font-size:15px} summary::-webkit-details-marker{display:none}
+.menu{position:absolute;z-index:9;left:0;right:0;top:33px;background:white;border:1px solid var(--line);border-radius:12px;padding:8px;box-shadow:0 12px 28px #0002}
+.menu label{display:flex;gap:9px;padding:7px;border-radius:8px;font-size:13px}.menu label:hover{background:var(--soft)}
+.menu input{accent-color:var(--pink)}
+.clear{border:0;border-radius:14px;padding:0 18px;color:#fff;font-weight:700;background:linear-gradient(90deg,var(--pink),var(--purple));cursor:pointer}
+.meta{display:flex;justify-content:space-between;gap:10px;margin:12px 2px}.count{font-size:13px;color:var(--muted)}
+.chips{display:flex;gap:6px;flex-wrap:wrap}.chip{font-size:11px;color:var(--purple);background:#f7f2fc;border-radius:999px;padding:5px 8px}
+.results{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.card{border:1px solid var(--line);border-radius:16px;padding:15px;background:#fff;transition:.18s}.card:hover{transform:translateY(-2px);box-shadow:0 8px 22px #20114a14;border-color:#d8c7ef}
+.id{font-size:11px;color:var(--pink);font-weight:800;letter-spacing:.12em}.title{font-size:19px;font-weight:800;margin:6px 0 3px}.loc{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.07em;margin-bottom:9px}
+.tags{display:flex;flex-wrap:wrap;gap:6px}.tag{font-size:10px;background:var(--soft);padding:5px 8px;border-radius:999px}.comp .tag{color:var(--purple);background:#f4f0fb}
+.open{display:inline-block;margin-top:12px;font-size:12px;font-weight:800;color:var(--purple);text-decoration:none}.disabled{opacity:.32;pointer-events:none}
+.empty{grid-column:1/-1;border:1px dashed var(--line);border-radius:16px;padding:30px;text-align:center;color:var(--muted)}
+@media(max-width:760px){.filters,.results{grid-template-columns:1fr}.clear{height:48px}}
+</style>
+</head>
+<body><div class="app">
+<div class="search"><input id="q" placeholder="Search airport, topic, phase, keyword..."><span>⌕</span></div>
+<div class="filters">
+<div class="box"><small>OPERATIONAL FOCUS</small><select id="focus"><option value="">All operational areas</option></select></div>
+<div class="box"><small>PILOT COMPETENCY</small><details><summary id="summary">All competencies ▾</summary><div class="menu" id="menu"></div></details></div>
+<button class="clear" id="clear">CLEAR</button>
+</div>
+<div class="meta"><div class="count" id="count"></div><div class="chips" id="chips"></div></div>
+<div class="results" id="results"></div>
+</div>
+<script>
+const competencies=[["KNO","Knowledge"],["PRO","Application of Procedures"],["COM","Communication"],["FPA","Flight Path Management – Automation"],["FPM","Flight Path Management – Manual"],["LTW","Leadership & Teamwork"],["PSD","Problem Solving & Decision-Making"],["SAW","Situation Awareness"],["WLM","Workload Management"]];
+const scenarios=[
+{id:"LL-001",title:"Descent Management — RWY 07",location:"London Luton (LTN)",focus:["Arrival","Approach","Energy Management"],competencies:["SAW","WLM","FPA","PSD"],keywords:["luton","ltn","07","descent","high","energy","profile","vectoring","cda","automation","workload"],url:""},
+{id:"LL-002",title:"GPS Interference",location:"Kaunas (KUN)",focus:["Arrival","Navigation","Threat Management"],competencies:["SAW","PSD","KNO","PRO"],keywords:["kaunas","kun","gps","gnss","interference","jamming","navigation"],url:""},
+{id:"LL-003",title:"Taxi-Out Threats",location:"Barcelona (BCN)",focus:["Ground Operations","Departure"],competencies:["SAW","COM","LTW","PRO"],keywords:["barcelona","bcn","taxi","ground","hotspot","clearance"],url:""},
+{id:"LL-004",title:"High-Energy Approach",location:"Palma de Mallorca (PMI)",focus:["Approach","Energy Management"],competencies:["SAW","WLM","FPA","PSD"],keywords:["palma","pmi","high energy","approach","descent","stabilised","profile"],url:""},
+{id:"LL-005",title:"CONF 3 / Landing Decision",location:"London Luton (LTN)",focus:["Approach","Landing","Decision-Making"],competencies:["PRO","PSD","SAW","WLM"],keywords:["luton","ltn","conf 3","landing","rops","runway","captain"],url:""},
+{id:"LL-006",title:"Fuel & Runway Changes",location:"Madrid (MAD)",focus:["Departure","Fuel","Decision-Making"],competencies:["PSD","WLM","PRO","KNO"],keywords:["madrid","mad","fuel","runway change","departure","planning"],url:""},
+{id:"LL-007",title:"Arrival Threats — RWY 35",location:"Tirana (TIA)",focus:["Arrival","Approach","Terrain","Threat Management"],competencies:["SAW","WLM","PSD","KNO"],keywords:["tirana","tia","35","terrain","arrival","approach","weather"],url:""},
+{id:"LL-008",title:"Terrain & Arrival Management",location:"Antalya (AYT)",focus:["Arrival","Terrain","Threat Management"],competencies:["SAW","WLM","PSD","KNO"],keywords:["antalya","ayt","terrain","arrival","approach","descent"],url:""}
+];
+const q=document.getElementById("q"),focus=document.getElementById("focus"),menu=document.getElementById("menu"),summary=document.getElementById("summary"),results=document.getElementById("results"),count=document.getElementById("count"),chips=document.getElementById("chips");
+[...new Set(scenarios.flatMap(s=>s.focus))].sort().forEach(f=>{let o=document.createElement("option");o.value=f;o.textContent=f;focus.appendChild(o)});
+competencies.forEach(([c,n])=>{let l=document.createElement("label");l.innerHTML=`<input type="checkbox" value="${c}"><span><b>${c}</b> — ${n}</span>`;menu.appendChild(l)});
+const selected=()=>[...menu.querySelectorAll("input:checked")].map(x=>x.value);
+const text=s=>[s.id,s.title,s.location,...s.focus,...s.competencies,...s.keywords].join(" ").toLowerCase();
+function render(){
+ let query=q.value.trim().toLowerCase(),f=focus.value,cs=selected();
+ let list=scenarios.filter(s=>(!query||text(s).includes(query))&&(!f||s.focus.includes(f))&&(!cs.length||cs.every(c=>s.competencies.includes(c))));
+ count.textContent=`${list.length} scenario${list.length===1?"":"s"} found`; summary.textContent=cs.length?cs.join(" · ")+" ▾":"All competencies ▾";
+ chips.innerHTML="";[...(f?[f]:[]),...cs].forEach(x=>{let e=document.createElement("span");e.className="chip";e.textContent=x;chips.appendChild(e)});
+ results.innerHTML=list.length?"":'<div class="empty">No Line Logic scenarios match those filters.</div>';
+ list.forEach(s=>{let d=document.createElement("div");d.className="card";d.innerHTML=`<div class="id">${s.id}</div><div class="title">${s.title}</div><div class="loc">${s.location}</div><div class="tags">${s.focus.map(t=>`<span class="tag">${t}</span>`).join("")}</div><div class="tags comp" style="margin-top:7px">${s.competencies.map(t=>`<span class="tag">${t}</span>`).join("")}</div><a class="open ${s.url?"":"disabled"}" href="${s.url||"#"}" target="_top">OPEN SCENARIO →</a>`;results.appendChild(d)});
+}
+q.oninput=render;focus.onchange=render;menu.onchange=render;document.getElementById("clear").onclick=()=>{q.value="";focus.value="";menu.querySelectorAll("input").forEach(x=>x.checked=false);render()};render();
+</script></body></html>
