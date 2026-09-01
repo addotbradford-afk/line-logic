@@ -4,8 +4,16 @@
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Line Logic Finder</title>
 <link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="landing.css">
 </head>
-<body><div class="app">
+<body>
+<section class="landing" id="landing" aria-label="Line Logic welcome screen">
+<button class="landing-enter" id="landing-enter" type="button" aria-label="Enter the Line Logic dashboard">
+<img src="assets/line-logic-landing.png" alt="Line Logic — guided line-based scenarios for Wizz Air UK">
+<span class="sr-only">Enter the Line Logic dashboard</span>
+</button>
+</section>
+<div class="app">
 <div class="search"><input id="q" type="search" aria-label="Search scenarios" placeholder="Search airport, topic, phase, keyword..."><span aria-hidden="true">⌕</span></div>
 <div class="filters">
 <div class="box"><small>OPERATIONAL FOCUS</small><select id="focus"><option value="">All operational areas</option></select></div>
@@ -22,5 +30,5 @@
 <div id="modal-content"></div>
 </section>
 </div>
-<script src="scenarios.js"></script><script src="app.js"></script>
+<script src="scenarios.js"></script><script src="app.js"></script><script src="landing.js"></script>
 </body></html>

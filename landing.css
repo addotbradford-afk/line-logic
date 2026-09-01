@@ -1,0 +1,41 @@
+.landing {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: #fff;
+  opacity: 1;
+  transition: opacity 450ms ease;
+}
+
+.landing.is-leaving {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.landing-enter {
+  display: block;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  border: 0;
+  background: #fff;
+  cursor: pointer;
+}
+
+.landing-enter img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.landing-enter:focus-visible {
+  outline: 4px solid #e5007d;
+  outline-offset: -4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .landing {
+    transition: none;
+  }
+}
