@@ -200,16 +200,20 @@ body {
 .mode-icon {
   width: 76px;
   height: 76px;
-  margin: 16px 0 7px;
+  margin: 16px auto 7px;
   display: block;
   object-fit: contain;
 }
 
-.mode-card-guided .mode-number {
+.mode-card-guided .mode-number,
+.mode-card-quiz .mode-number,
+.mode-card-topics .mode-number {
   margin-bottom: 0;
 }
 
-.mode-card-guided .mode-name {
+.mode-card-guided .mode-name,
+.mode-card-quiz .mode-name,
+.mode-card-topics .mode-name {
   margin-top: 0;
 }
 
