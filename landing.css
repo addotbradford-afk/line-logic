@@ -197,6 +197,22 @@ body {
   letter-spacing: 0.14em;
 }
 
+.mode-icon {
+  width: 76px;
+  height: 76px;
+  margin: 16px 0 7px;
+  display: block;
+  object-fit: contain;
+}
+
+.mode-card-guided .mode-number {
+  margin-bottom: 0;
+}
+
+.mode-card-guided .mode-name {
+  margin-top: 0;
+}
+
 .mode-name {
   display: block;
   max-width: 260px;
@@ -356,6 +372,12 @@ body {
   .mode-card {
     min-height: 164px;
     padding: 19px;
+  }
+
+  .mode-icon {
+    width: 62px;
+    height: 62px;
+    margin-top: 12px;
   }
 
   .mode-arrow {
