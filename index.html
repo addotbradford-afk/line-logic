@@ -2,38 +2,62 @@
 <html lang="en">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Line Logic Finder</title>
+<title>Line Logic | Home</title>
+<meta name="description" content="Choose a Line Logic learning mode.">
 <meta name="theme-color" content="#2e108d">
 <link rel="icon" href="assets/line-logic-icon.svg" type="image/svg+xml">
 <link rel="icon" href="assets/favicon.png" type="image/png" sizes="64x64">
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png" sizes="180x180">
 <link rel="manifest" href="manifest.webmanifest">
-<link rel="stylesheet" href="styles.css">
-<link rel="stylesheet" href="landing.css">
+<link rel="stylesheet" href="landing.css?v=20260905-2">
 </head>
-<body>
+<body class="home-page">
+<script>if(new URLSearchParams(location.search).get("home")==="1")document.documentElement.classList.add("skip-landing");</script>
 <section class="landing" id="landing" aria-label="Line Logic welcome screen">
-<button class="landing-enter" id="landing-enter" type="button" aria-label="Enter the Line Logic dashboard">
+<button class="landing-enter" id="landing-enter" type="button" aria-label="Enter the Line Logic home page">
 <img src="assets/line-logic-landing.png" alt="Line Logic — guided line-based scenarios for Wizz Air UK">
-<span class="sr-only">Enter the Line Logic dashboard</span>
+<span class="sr-only">Enter the Line Logic home page</span>
 </button>
 </section>
-<div class="app">
-<div class="search"><input id="q" type="search" aria-label="Search scenarios" placeholder="Search airport, topic, phase, keyword..."><span aria-hidden="true">⌕</span></div>
-<div class="filters">
-<div class="box"><small>OPERATIONAL FOCUS</small><select id="focus"><option value="">All operational areas</option></select></div>
-<div class="box"><small>PILOT COMPETENCY</small><details><summary id="summary">All competencies ▾</summary><div class="menu" id="menu"></div></details></div>
-<button class="clear" id="clear" type="button">Clear filters <span aria-hidden="true">×</span></button>
+
+<main class="home-shell" id="home">
+<header class="home-header">
+<div class="home-brand">
+<img src="assets/line-logic-icon.svg" alt="" aria-hidden="true">
+<div>
+<span class="home-eyebrow">FOR WIZZ AIR UK</span>
+<strong>LINE LOGIC</strong>
 </div>
-<div class="meta"><div class="count" id="count" aria-live="polite"></div><div class="chips" id="chips"></div></div>
-<div class="results" id="results"></div>
 </div>
-<div class="modal" id="modal" hidden>
-<div class="modal-shade" data-close></div>
-<section class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modal-title" tabindex="-1">
-<button class="modal-close" type="button" data-close aria-label="Close scenario preview">×</button>
-<div id="modal-content"></div>
-</section>
-</div>
-<script src="scenarios.js"></script><script src="app.js"></script><script src="landing.js"></script>
-</body></html>
+<p class="home-kicker">TRAINING MODES</p>
+<h1>How would you like to begin?</h1>
+<p class="home-intro">Choose a route through the Line Logic learning experience.</p>
+</header>
+
+<nav class="mode-grid" aria-label="Line Logic learning modes">
+<a class="mode-card mode-card-guided" href="guided.html">
+<span class="mode-number">01</span>
+<span class="mode-name">Guided line scenarios</span>
+<span class="mode-description">Follow a complete operational scenario and make decisions as the flight develops.</span>
+<span class="mode-arrow" aria-hidden="true">→</span>
+</a>
+
+<a class="mode-card mode-card-quiz" href="quiz.html">
+<span class="mode-number">02</span>
+<span class="mode-name">Pop quiz mode</span>
+<span class="mode-description">Test your knowledge through short, focused questions.</span>
+<span class="mode-arrow" aria-hidden="true">→</span>
+</a>
+
+<a class="mode-card mode-card-topics" href="topics.html">
+<span class="mode-number">03</span>
+<span class="mode-name">Topic search</span>
+<span class="mode-description">Find learning material by operational focus or pilot competency.</span>
+<span class="mode-arrow" aria-hidden="true">→</span>
+</a>
+</nav>
+</main>
+
+<script src="landing.js?v=20260905-2"></script>
+</body>
+</html>

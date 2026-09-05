@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Guided Line Scenarios | Line Logic</title>
+<meta name="description" content="Choose a guided Line Logic operational scenario.">
+<meta name="theme-color" content="#2e108d">
+<link rel="icon" href="assets/line-logic-icon.svg" type="image/svg+xml">
+<link rel="icon" href="assets/favicon.png" type="image/png" sizes="64x64">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png" sizes="180x180">
+<link rel="stylesheet" href="styles.css?v=20260905-2">
+<link rel="stylesheet" href="landing.css?v=20260905-2">
+</head>
+<body class="destination-page">
+<header class="destination-bar">
+<a class="back-link" href="./?home=1" aria-label="Back to Line Logic home"><span aria-hidden="true">←</span> Home</a>
+<div class="destination-brand"><img src="assets/line-logic-icon.svg" alt=""><span>LINE LOGIC</span></div>
+</header>
+
+<main class="app destination-content">
+<div class="destination-heading">
+<span>MODE 01</span>
+<h1>Guided line scenarios</h1>
+<p>Choose a complete scenario and work through the developing flight.</p>
+</div>
+<div class="search"><input id="q" type="search" aria-label="Search scenarios" placeholder="Search airport, topic, phase, keyword..."><span aria-hidden="true">⌕</span></div>
+<div class="filters">
+<div class="box"><small>OPERATIONAL FOCUS</small><select id="focus"><option value="">All operational areas</option></select></div>
+<div class="box"><small>PILOT COMPETENCY</small><details><summary id="summary">All competencies ▾</summary><div class="menu" id="menu"></div></details></div>
+<button class="clear" id="clear" type="button">Clear filters <span aria-hidden="true">×</span></button>
+</div>
+<div class="meta"><div class="count" id="count" aria-live="polite"></div><div class="chips" id="chips"></div></div>
+<div class="results" id="results"></div>
+</main>
+
+<div class="modal" id="modal" hidden>
+<div class="modal-shade" data-close></div>
+<section class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modal-title" tabindex="-1">
+<button class="modal-close" type="button" data-close aria-label="Close scenario preview">×</button>
+<div id="modal-content"></div>
+</section>
+</div>
+<script src="scenarios.js?v=20260905-2"></script><script src="app.js?v=20260905-2"></script>
+</body>
+</html>

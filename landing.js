@@ -6,10 +6,18 @@
 
   if (!landing || !enter) return;
 
+  const query = new URLSearchParams(window.location.search);
+
+  if (query.get("home") === "1") {
+    landing.remove();
+    window.history.replaceState({}, "", window.location.pathname);
+    return;
+  }
+
   let hasEntered = false;
   let removeFallback;
 
-  function showDashboard() {
+  function showHome() {
     if (hasEntered) return;
     hasEntered = true;
 
@@ -25,6 +33,6 @@
     removeFallback = window.setTimeout(removeLanding, 600);
   }
 
-  enter.addEventListener("click", showDashboard);
-  const autoEnter = window.setTimeout(showDashboard, 2000);
+  enter.addEventListener("click", showHome);
+  const autoEnter = window.setTimeout(showHome, 2000);
 })();
