@@ -11,6 +11,7 @@
   if (query.get("home") === "1") {
     landing.remove();
     window.history.replaceState({}, "", window.location.pathname);
+    window.dispatchEvent(new CustomEvent("lineLogicLandingComplete"));
     return;
   }
 
@@ -27,6 +28,7 @@
     const removeLanding = function () {
       window.clearTimeout(removeFallback);
       landing.remove();
+      window.dispatchEvent(new CustomEvent("lineLogicLandingComplete"));
     };
 
     landing.addEventListener("transitionend", removeLanding, { once: true });

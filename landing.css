@@ -67,9 +67,223 @@ body {
 
 .landing-enter:focus-visible,
 .mode-card:focus-visible,
-.back-link:focus-visible {
+.back-link:focus-visible,
+.access-card button:focus-visible,
+.access-card input:focus-visible,
+.session-sign-out:focus-visible {
   outline: 4px solid rgba(229, 0, 125, 0.36);
   outline-offset: 3px;
+}
+
+.access-locked > :not(.landing):not(.access-overlay) {
+  visibility: hidden;
+}
+
+.access-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1100;
+  padding: 22px;
+  overflow-y: auto;
+  place-items: center;
+  background:
+    radial-gradient(circle at 85% 90%, rgba(46, 16, 141, 0.12), transparent 34%),
+    radial-gradient(circle at 10% 8%, rgba(229, 0, 125, 0.1), transparent 30%),
+    rgba(255, 255, 255, 0.98);
+}
+
+.access-overlay:not([hidden]) {
+  display: grid;
+}
+
+.access-card {
+  width: min(440px, 100%);
+  padding: clamp(28px, 6vw, 46px);
+  border: 1px solid var(--ll-line);
+  border-radius: 26px;
+  background: rgba(255, 255, 255, 0.97);
+  box-shadow: 0 24px 70px rgba(36, 17, 72, 0.14);
+  text-align: center;
+}
+
+.access-logo {
+  width: 62px;
+  height: 62px;
+  object-fit: contain;
+}
+
+.access-kicker {
+  margin: 18px 0 8px;
+  color: var(--ll-pink);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+}
+
+.access-card h1 {
+  margin: 0;
+  color: var(--ll-ink);
+  font-size: clamp(34px, 7vw, 48px);
+  line-height: 1;
+  letter-spacing: -0.035em;
+}
+
+.access-intro {
+  margin: 13px 0 27px;
+  color: var(--ll-muted);
+  font-size: 15px;
+  line-height: 1.45;
+}
+
+.access-user-button,
+.access-admin-toggle,
+.access-submit {
+  width: 100%;
+  min-height: 52px;
+  border-radius: 14px;
+  font: inherit;
+  cursor: pointer;
+}
+
+.access-user-button {
+  padding: 12px 18px;
+  display: grid;
+  gap: 3px;
+  color: #fff;
+  background: linear-gradient(100deg, var(--ll-pink), var(--ll-purple));
+  border: 0;
+  box-shadow: 0 10px 26px rgba(121, 28, 129, 0.22);
+}
+
+.access-user-button strong {
+  font-size: 15px;
+}
+
+.access-user-button span {
+  font-size: 11px;
+  opacity: 0.84;
+}
+
+.access-divider {
+  margin: 20px 0;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: #aaa5b1;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.access-divider::before,
+.access-divider::after {
+  content: "";
+  height: 1px;
+  flex: 1;
+  background: var(--ll-line);
+}
+
+.access-admin-toggle {
+  color: var(--ll-purple);
+  background: #fff;
+  border: 1px solid rgba(46, 16, 141, 0.2);
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+}
+
+.access-admin-form {
+  margin-top: 20px;
+  text-align: left;
+}
+
+.access-admin-form label {
+  display: block;
+  margin: 12px 0 6px;
+  color: var(--ll-ink);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.access-admin-form input {
+  width: 100%;
+  min-height: 48px;
+  padding: 0 14px;
+  color: var(--ll-ink);
+  background: #fff;
+  border: 1px solid #dcd6e5;
+  border-radius: 12px;
+  font: inherit;
+}
+
+.access-admin-form input:focus {
+  border-color: rgba(46, 16, 141, 0.5);
+}
+
+.access-error {
+  min-height: 18px;
+  margin: 10px 0 4px;
+  color: #b4234b;
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+.access-submit {
+  color: #fff;
+  background: var(--ll-purple);
+  border: 0;
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.session-control {
+  position: fixed;
+  top: 16px;
+  right: 16px;
+  z-index: 800;
+  min-height: 38px;
+  padding: 5px 6px 5px 12px;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  color: var(--ll-purple);
+  background: rgba(255, 255, 255, 0.94);
+  border: 1px solid var(--ll-line);
+  border-radius: 999px;
+  box-shadow: 0 7px 22px rgba(36, 17, 72, 0.09);
+  backdrop-filter: blur(10px);
+}
+
+.session-role {
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+}
+
+[data-line-logic-role="admin"] .session-role {
+  color: var(--ll-pink);
+}
+
+.session-sign-out {
+  min-height: 28px;
+  padding: 0 10px;
+  color: var(--ll-muted);
+  background: var(--ll-soft);
+  border: 0;
+  border-radius: 999px;
+  font-size: 10px;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+[data-admin-only] {
+  display: none !important;
+}
+
+[data-line-logic-role="admin"] [data-admin-only] {
+  display: revert !important;
 }
 
 .home-page {
@@ -369,6 +583,20 @@ body {
 }
 
 @media (max-width: 520px) {
+  .access-overlay {
+    padding: 14px;
+  }
+
+  .access-card {
+    padding: 27px 22px;
+    border-radius: 21px;
+  }
+
+  .session-control {
+    top: 10px;
+    right: 10px;
+  }
+
   .home-brand {
     margin-bottom: 32px;
   }
