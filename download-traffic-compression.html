@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>Download traffic compression animation · Line Logic</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --pink: #d5007e;
+      --purple: #32128c;
+      --ink: #25202d;
+      --muted: #77717e;
+      --line: #e8e2ec;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      min-height: 100vh;
+      margin: 0;
+      display: grid;
+      place-items: center;
+      padding: 24px;
+      font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 12% 8%, rgba(213, 0, 126, 0.08), transparent 28%),
+        radial-gradient(circle at 88% 88%, rgba(50, 18, 140, 0.09), transparent 32%),
+        #fff;
+    }
+
+    main {
+      width: min(460px, 100%);
+      padding: clamp(30px, 7vw, 48px);
+      border: 1px solid var(--line);
+      border-radius: 26px;
+      background: rgba(255,255,255,0.96);
+      box-shadow: 0 24px 70px rgba(40, 25, 70, 0.12);
+      text-align: center;
+    }
+
+    img {
+      width: 64px;
+      height: 64px;
+      object-fit: contain;
+    }
+
+    .kicker {
+      margin: 17px 0 8px;
+      color: var(--pink);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.17em;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(30px, 8vw, 44px);
+      line-height: 1.02;
+      letter-spacing: -0.04em;
+    }
+
+    p {
+      margin: 15px auto 25px;
+      max-width: 32ch;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.5;
+    }
+
+    a {
+      min-height: 54px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      padding: 13px 20px;
+      border-radius: 14px;
+      color: #fff;
+      background: linear-gradient(100deg, var(--pink), var(--purple));
+      box-shadow: 0 11px 28px rgba(91, 26, 133, 0.23);
+      font-size: 15px;
+      font-weight: 800;
+      text-decoration: none;
+    }
+
+    a:focus-visible {
+      outline: 4px solid rgba(213,0,126,0.25);
+      outline-offset: 4px;
+    }
+
+    small {
+      display: block;
+      margin-top: 14px;
+      color: #9a94a0;
+      font-size: 11px;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <img src="assets/line-logic-icon.svg" alt="Line Logic">
+    <div class="kicker">LINE LOGIC</div>
+    <h1>Traffic compression</h1>
+    <p>Your MP4 is ready. The download should begin automatically; the button remains available if Safari blocks it.</p>
+    <a id="download" href="assets/traffic-compression.mp4" download="Line-Logic-Traffic-Compression.mp4">Download MP4</a>
+    <small>Square · 600 × 600 · H.264 · muted loop</small>
+  </main>
+  <script>
+    window.addEventListener("load", function () {
+      window.setTimeout(function () {
+        document.getElementById("download").click();
+      }, 350);
+    });
+  </script>
+</body>
+</html>
