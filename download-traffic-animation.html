@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Download traffic animation · Line Logic</title>
+<link rel="icon" href="assets/favicon.png" type="image/png">
+<style>
+:root {
+  color-scheme: light;
+  font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --ink: #261747;
+  --muted: #706b79;
+  --pink: #e5007d;
+  --purple: #2e108d;
+  --line: rgba(46, 16, 141, 0.14);
+}
+* { box-sizing: border-box; }
+body {
+  min-height: 100svh;
+  margin: 0;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  background:
+    radial-gradient(circle at 12% 8%, rgba(229, 0, 125, 0.09), transparent 30%),
+    radial-gradient(circle at 88% 92%, rgba(46, 16, 141, 0.10), transparent 34%),
+    #fff;
+  color: var(--ink);
+}
+main {
+  width: min(620px, 100%);
+  padding: clamp(24px, 5vw, 42px);
+  border: 1px solid var(--line);
+  border-radius: 24px;
+  background: rgba(255,255,255,.97);
+  box-shadow: 0 22px 65px rgba(38,23,71,.13);
+  text-align: center;
+}
+.logo { width: 56px; height: 56px; object-fit: contain; }
+.kicker {
+  margin: 15px 0 8px;
+  color: var(--pink);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: .17em;
+}
+h1 { margin: 0; font-size: clamp(30px, 6vw, 45px); letter-spacing: -.035em; }
+p { color: var(--muted); line-height: 1.55; }
+video {
+  display: block;
+  width: min(430px, 100%);
+  margin: 24px auto;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  background: #e3f3f9;
+  box-shadow: 0 12px 34px rgba(38,23,71,.10);
+}
+.download {
+  display: inline-flex;
+  min-height: 54px;
+  align-items: center;
+  justify-content: center;
+  padding: 0 25px;
+  border-radius: 14px;
+  color: #fff;
+  background: linear-gradient(100deg, var(--pink), var(--purple));
+  box-shadow: 0 10px 28px rgba(121,28,129,.24);
+  font-weight: 800;
+  text-decoration: none;
+}
+.download:focus-visible { outline: 4px solid rgba(229,0,125,.3); outline-offset: 4px; }
+.filename { margin: 13px 0 0; font-size: 12px; }
+</style>
+</head>
+<body>
+<main>
+  <img class="logo" src="assets/line-logic-icon.svg" alt="Line Logic">
+  <p class="kicker">LINE LOGIC ASSET</p>
+  <h1>Traffic compression</h1>
+  <p>Square looping MP4, ready to use in Line Logic.</p>
+  <video autoplay loop muted playsinline poster="assets/traffic-compression-poster.png">
+    <source src="assets/traffic-compression.mp4" type="video/mp4">
+  </video>
+  <a class="download" href="assets/traffic-compression.mp4" download="line-logic-traffic-compression.mp4">Download MP4</a>
+  <p class="filename">line-logic-traffic-compression.mp4</p>
+</main>
+</body>
+</html>
