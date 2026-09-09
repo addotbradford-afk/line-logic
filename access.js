@@ -71,7 +71,7 @@
     });
 
     control.append(label, signOut);
-    document.body.append(control);
+    (document.querySelector(".site-session-slot") || document.body).append(control);
   }
 
   function unlockSite(role) {
@@ -167,3 +167,4 @@
     window.requestAnimationFrame(showAccessOverlay);
   }
 })();
+
