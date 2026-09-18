@@ -1,1 +1,64 @@
-{"station": "EGGW", "observedAt": "2026-09-18T02:50:00Z", "metar": "EGGW 180250Z AUTO 26009KT 9999 NCD 09/08 Q1012"}
+{
+  "airports": {
+    "EGLL": {
+      "name": "Heathrow",
+      "station": "EGLL",
+      "observedAt": "2026-09-18T03:20:00Z",
+      "metar": "EGLL 180320Z AUTO 22006KT 190V250 9999 NCD 11/09 Q1013"
+    },
+    "EGKK": {
+      "name": "Gatwick",
+      "station": "EGKK",
+      "observedAt": "2026-09-18T03:20:00Z",
+      "metar": "EGKK 180320Z 24005KT CAVOK 10/09 Q1013"
+    },
+    "EGCC": {
+      "name": "Manchester",
+      "station": "EGCC",
+      "observedAt": "2026-09-18T03:20:00Z",
+      "metar": "EGCC 180320Z AUTO 23008KT 9999 BKN024 11/09 Q1010"
+    },
+    "EGSS": {
+      "name": "Stansted",
+      "station": "EGSS",
+      "observedAt": "2026-09-18T03:20:00Z",
+      "metar": "EGSS 180320Z AUTO 22007KT 9999 NCD 09/08 Q1013"
+    },
+    "EGGW": {
+      "name": "Luton",
+      "station": "EGGW",
+      "observedAt": "2026-09-18T03:20:00Z",
+      "metar": "EGGW 180320Z AUTO 26010KT 9999 NCD 10/08 Q1012"
+    },
+    "EGBB": {
+      "name": "Birmingham",
+      "station": "EGBB",
+      "observedAt": "2026-09-18T03:20:00Z",
+      "metar": "EGBB 180320Z 21005KT 180V260 CAVOK 11/09 Q1012"
+    },
+    "EGPH": {
+      "name": "Edinburgh",
+      "station": "EGPH",
+      "observedAt": "2026-09-18T03:20:00Z",
+      "metar": "EGPH 180320Z AUTO 25012G22KT 9999 FEW030/// BKN040/// 12/10 Q1003"
+    },
+    "EGPF": {
+      "name": "Glasgow",
+      "station": "EGPF",
+      "observedAt": "2026-09-18T03:20:00Z",
+      "metar": "EGPF 180320Z AUTO 24014KT 9000 -RA SCT018 BKN026 BKN037 12/12 Q1004"
+    },
+    "EGGD": {
+      "name": "Bristol",
+      "station": "EGGD",
+      "observedAt": "2026-09-18T03:20:00Z",
+      "metar": "EGGD 180320Z AUTO 28012KT 9999 NCD 12/10 Q1014"
+    },
+    "EGAA": {
+      "name": "Belfast International",
+      "station": "EGAA",
+      "observedAt": "2026-09-18T03:20:00Z",
+      "metar": "EGAA 180320Z AUTO 25013KT 9999 SCT028 BKN033 12/11 Q1008"
+    }
+  }
+}

@@ -1,8 +1,9 @@
-name: Refresh Luton METAR
+name: Refresh UK airport METARs
 on:
   push:
     paths:
       - '.github/workflows/metar.yml'
+      - 'weather-update.py'
   schedule:
     - cron: '7,37 * * * *'
   workflow_dispatch:
@@ -14,25 +15,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Read latest NOAA METAR
-        run: |
-          python3 - <<'PY'
-          import urllib.request, json
-          from pathlib import Path
-          request = urllib.request.Request('https://tgftp.nws.noaa.gov/data/observations/metar/stations/EGGW.TXT', headers={'User-Agent': 'LineLogicWeather/1.0'})
-          with urllib.request.urlopen(request, timeout=30) as response:
-              lines = response.read().decode().strip().splitlines()
-          if len(lines) < 2 or not lines[1].startswith('EGGW '):
-              raise ValueError('Unexpected METAR response')
-          Path('weather.json').write_text(json.dumps({'station':'EGGW', 'observedAt':lines[0].replace('/','-').replace(' ','T')+':00Z', 'metar':lines[1]}))
-          PY
-      - name: Save updated report
+      - name: Read latest NOAA METARs
+        run: python3 weather-update.py
+      - name: Save updated reports
         run: |
           if ! git diff --quiet -- weather.json; then
             git config user.name 'Line Logic weather'
             git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
             git add weather.json
-            git commit -m 'Refresh Luton METAR'
+            git commit -m 'Refresh UK airport METARs'
             git push
           fi
       - name: Request Pages rebuild
