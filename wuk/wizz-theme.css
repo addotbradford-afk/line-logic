@@ -99,3 +99,5 @@
 .guided-page .search input:focus,.guided-page .box:focus-within{border-color:#c6007e;box-shadow:0 0 0 3px #c6007e12}
 @media(max-width:1000px){.guided-page .results{grid-template-columns:1fr}}
 @media(max-width:480px){.guided-page .card{grid-template-columns:minmax(0,1fr) 80px;gap:12px;padding:20px}.scenario-route img{width:80px;height:80px}.guided-heading{padding-right:85px}.guided-heading-icon{width:70px;height:70px}.guided-page .card .title{font-size:21px}}
+
+.guided-page .search .search-glass{top:50%;right:17px;transform:translateY(-50%);width:28px;height:28px;color:#c6007e;pointer-events:none}.search-glass svg{display:block;width:100%;height:100%}
