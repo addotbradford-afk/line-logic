@@ -106,3 +106,5 @@
 .guided-page .box select{appearance:none;-webkit-appearance:none;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='m3 4.5 3 3 3-3' fill='none' stroke='%236e6870' stroke-width='1.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat right center/12px 12px}
 .guided-page .box summary{position:relative}
 .guided-page .box summary::after{content:"";position:absolute;right:3px;top:7px;width:6px;height:6px;border-right:1.4px solid #6e6870;border-bottom:1.4px solid #6e6870;transform:rotate(45deg)}
+
+.guided-page .card{grid-template-columns:minmax(0,1fr) 160px}.scenario-route{opacity:1}.scenario-route img{width:160px;height:144px;margin-bottom:10px}@media(max-width:480px){.guided-page .card{grid-template-columns:1fr}.scenario-route{justify-self:start}.scenario-route img{width:160px;height:144px}}
