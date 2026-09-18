@@ -2,10 +2,10 @@
 (async function(){
 const receiver='https://line-logic-pop-quiz.addotbradford.workers.dev';
 if(window.parent===window)return;
-let signedIn=false,master=false,initials="";
-try{const token=sessionStorage.getItem('lineLogicWukMasterToken');if(token){const response=await fetch('https://aavinfwtnbwforbkgrzh.supabase.co/auth/v1/user',{headers:{apikey:'sb_publishable_Ot5qtj32uOZWxY9Z4G6T2g_jXmXi2il',Authorization:'Bearer '+token}});if(response.ok){const user=await response.json();signedIn=!!user.id&&!!user.email_confirmed_at&&!user.is_anonymous;const metadata=user.user_metadata||{};const name=String(metadata.full_name||metadata.display_name||metadata.first_name||"").trim();initials=String(metadata.initials||name.split(/\s+/).filter(Boolean).map(part=>part[0]).slice(0,2).join("")).toUpperCase().slice(0,4);}}}catch{}
+let signedIn=false,master=false,initials="",accountEmail="";
+try{const token=sessionStorage.getItem('lineLogicWukMasterToken');if(token){const response=await fetch('https://aavinfwtnbwforbkgrzh.supabase.co/auth/v1/user',{headers:{apikey:'sb_publishable_Ot5qtj32uOZWxY9Z4G6T2g_jXmXi2il',Authorization:'Bearer '+token}});if(response.ok){const user=await response.json();signedIn=!!user.id&&!!user.email_confirmed_at&&!user.is_anonymous;accountEmail=String(user.email||"").toLowerCase();const metadata=user.user_metadata||{};const name=String(metadata.full_name||metadata.display_name||metadata.first_name||"").trim();initials=String(metadata.initials||name.split(/\s+/).filter(Boolean).map(part=>part[0]).slice(0,2).join("")).toUpperCase().slice(0,4);}}}catch{}
 if(signedIn){try{const response=await fetch(receiver+'/api/wuk-master',{headers:{Authorization:'Bearer '+sessionStorage.getItem('lineLogicWukMasterToken')}});if(response.ok)master=(await response.json()).master===true;}catch{}}
-if(master)initials="AB";
+if(master){const profiles={"addotbradford@gmail.com":"AB","duncan.vaux@wizzair.com":"DV"};initials=Object.hasOwn(profiles,accountEmail)?profiles[accountEmail]:"";}
 window.parent.postMessage({type:'lineLogicAccountStatus',signedIn,master,initials},receiver);
 })();
 </script></body></html>
