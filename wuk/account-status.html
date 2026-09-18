@@ -2,8 +2,9 @@
 (async function(){
 const receiver='https://line-logic-pop-quiz.addotbradford.workers.dev';
 if(window.parent===window)return;
-let signedIn=false;
+let signedIn=false,master=false;
 try{const token=sessionStorage.getItem('lineLogicWukMasterToken');if(token){const response=await fetch('https://aavinfwtnbwforbkgrzh.supabase.co/auth/v1/user',{headers:{apikey:'sb_publishable_Ot5qtj32uOZWxY9Z4G6T2g_jXmXi2il',Authorization:'Bearer '+token}});if(response.ok){const user=await response.json();signedIn=!!user.id&&!!user.email_confirmed_at&&!user.is_anonymous;}}}catch{}
-window.parent.postMessage({type:'lineLogicAccountStatus',signedIn},receiver);
+if(signedIn){try{const response=await fetch(receiver+'/api/wuk-master',{headers:{Authorization:'Bearer '+sessionStorage.getItem('lineLogicWukMasterToken')}});if(response.ok)master=(await response.json()).master===true;}catch{}}
+window.parent.postMessage({type:'lineLogicAccountStatus',signedIn,master},receiver);
 })();
 </script></body></html>
