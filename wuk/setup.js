@@ -7,7 +7,7 @@ async function request(url,options={}){const response=await fetch(url,{...option
 try{
  if(!token)throw new Error('Open the setup link in your invitation email.');
  const user=await request(AUTH+'/user');if(!user.email_confirmed_at)throw new Error('Confirm your email before continuing.');
- await request(API);
+ const record=await request(API);if(record.master&&record.profile.setup_completed){token=null;message.textContent='Your email is verified. Your master account is ready—sign in with your existing password.';login.hidden=false;login.textContent='Sign in to WUK';return;}
  document.getElementById('setupEmail').value=user.email;document.getElementById('firstName').value=user.user_metadata?.first_name||'';document.getElementById('surname').value=user.user_metadata?.surname||'';form.hidden=false;message.textContent='Your email has been verified.';
  form.onsubmit=async event=>{event.preventDefault();const password=document.getElementById('setupPassword'),confirm=document.getElementById('setupConfirm'),button=form.querySelector('button');button.disabled=true;message.textContent='Saving your account…';try{
   if(password.value!==confirm.value)throw new Error('The passwords do not match.');
