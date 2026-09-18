@@ -152,3 +152,40 @@ html,body,#cover{background:#f7f4ed}
 .hero-monogram{background:#b7b3af}
 
 .hero-monogram{background:#484c50}
+
+/* Refined account overlay and compact layouts — preview only. */
+dialog{border:1px solid #e1e5e7;border-radius:26px;background:#fcfbf8;padding:38px 40px;width:min(440px,calc(100vw - 32px));box-shadow:0 24px 70px #24374624}
+dialog::backdrop{background:#24374655;backdrop-filter:blur(7px)}
+.login-logo{display:block;width:54px;height:54px;object-fit:contain;margin:0 auto 18px}
+dialog .eyebrow{text-align:center;font-size:10px;letter-spacing:2px;color:#7d8b95;margin-bottom:10px}
+dialog h2{text-align:center;font-size:32px;margin:0 0 10px;letter-spacing:-.8px}
+.login-intro{text-align:center;color:#78858e;font-size:14px;line-height:1.5;margin:0 0 28px}
+dialog .close{top:14px;right:16px;width:32px;height:32px;border-radius:50%;line-height:1;font-size:24px}
+dialog .close:hover{background:#eaeef0}
+dialog label{font-size:12px;font-weight:600;color:#566773}
+dialog input{border-radius:12px;background:white;border-color:#d6dde1;height:48px;margin-bottom:18px}
+dialog input:focus{outline:2px solid #91a8b7;outline-offset:2px}
+dialog .submit{border-radius:14px;background:#484c50;min-height:50px;font-size:14px;font-weight:600;transition:background .15s}
+dialog .submit:hover{background:#30383f}
+dialog .form-message{margin:12px 0 0;font-size:12px}
+dialog .account-links{border-top:1px solid #e2e6e8;margin-top:8px;padding-top:19px;gap:12px}
+dialog .account-links button{font-size:12px;color:#647988;text-decoration:none}
+dialog .account-links button:hover{text-decoration:underline}
+@media(max-width:600px){dialog{padding:30px 24px;border-radius:22px}.header-right{min-width:0}#cover>header{gap:14px}.weather{max-width:50%}.weather .eyebrow{line-height:1.5;font-size:10px;letter-spacing:1px}.report{overflow-wrap:anywhere}#utc{font-size:11px;letter-spacing:1px}.hero-copy .centre-text{font-size:15px}.hero-monogram{height:360px}}
+@media(max-width:380px){#cover>header{padding:20px 16px}#cover nav{gap:5px}#homeLink,#signIn{padding:8px;font-size:12px;gap:5px}.weather{padding-left:8px}.hero-copy h1{font-size:38px}}
+
+/* Flat warm-white background — preview only. */
+html,body,#cover{background:#f7f4ed}
+
+/* Restore flat warm-white preview and original raw METAR style. */
+html,body,#cover{background:#f7f4ed}
+
+/* Colour movement confined to the artwork — preview only. */
+.hero-monogram svg>rect{animation:art-colour-cycle 24s ease-in-out infinite}
+.hero-monogram .monogram-back{animation:art-secondary-cycle 24s ease-in-out infinite}
+.hero-monogram .monogram-front{fill:#faf5ed;animation:none}
+@keyframes art-colour-cycle{0%,100%{fill:#e76f51}25%{fill:#d96987}50%{fill:#294d70}75%{fill:#c84e4e}}
+@keyframes art-secondary-cycle{0%,100%{fill:#f2b7a4}25%{fill:#edb0c0}50%{fill:#8da8bd}75%{fill:#eaa29b}}
+@media(prefers-reduced-motion:reduce){.hero-monogram svg>rect,.hero-monogram .monogram-back{animation:none}.hero-monogram svg>rect{fill:#e76f51}.hero-monogram .monogram-back{fill:#f2b7a4}}
+
+.operation-promise{margin:24px 0 0;color:#484c50;font-size:14px;font-weight:600;letter-spacing:.3px}
