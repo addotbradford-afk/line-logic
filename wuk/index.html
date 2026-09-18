@@ -5,96 +5,95 @@
 <title>Line Logic | Home</title>
 <meta name="description" content="Choose a Line Logic learning mode.">
 <meta name="theme-color" content="#2e108d">
-<link rel="icon" href="assets/line-logic-icon.svg" type="image/svg+xml">
-<link rel="icon" href="assets/favicon.png" type="image/png" sizes="64x64">
-<link rel="apple-touch-icon" href="assets/apple-touch-icon.png" sizes="180x180">
-<link rel="manifest" href="manifest.webmanifest">
-<link rel="stylesheet" href="landing.css?v=20260906-7">
-<link rel="stylesheet" href="site-header.css?v=20260910-1">
+<link rel="icon" href="assets/line-logic-icon.svg?v=wizz1" type="image/svg+xml">
+<link rel="icon" href="https://linelogic.uk/wuk/assets/favicon.png" type="image/png" sizes="64x64">
+<link rel="apple-touch-icon" href="https://linelogic.uk/wuk/assets/apple-touch-icon.png" sizes="180x180">
+<link rel="manifest" href="https://linelogic.uk/wuk/manifest.webmanifest">
+<link rel="stylesheet" href="landing.css">
+<link rel="stylesheet" href="site-header.css">
+<link rel="stylesheet" href="wizz-theme.css?v=1">
 </head>
 <body class="home-page access-locked">
-<script>if(new URLSearchParams(location.search).get("home")==="1")document.documentElement.classList.add("skip-landing");</script>
-<section class="landing" id="landing" aria-label="Line Logic welcome screen">
-<button class="landing-enter" id="landing-enter" type="button" aria-label="Enter the Line Logic home page">
-<img src="assets/line-logic-landing.png" alt="Line Logic — guided line-based scenarios for Wizz Air UK">
-<span class="sr-only">Enter the Line Logic home page</span>
-</button>
-</section>
+
+<section class="landing" id="landing" aria-label="Wizz Air UK introduction" hidden><iframe id="wizzIntro" title="Line Logic for Wizz Air UK" tabindex="-1"></iframe><button id="skipWizzIntro" type="button">Skip introduction</button></section>
 
 <section class="access-overlay" id="accessOverlay" aria-labelledby="accessTitle" hidden>
 <div class="access-card" role="dialog" aria-modal="true">
-<img class="access-logo" src="assets/line-logic-icon.svg" alt="">
+<img class="access-logo" src="assets/line-logic-icon.svg?v=wizz1" alt="">
 <p class="access-kicker">LINE LOGIC ACCESS</p>
 <h1 id="accessTitle">Welcome</h1>
-<p class="access-intro">Choose how you would like to enter Line Logic.</p>
+<p class="access-intro">Continue to your Wizz Air UK training.</p>
 
 <button class="access-user-button" id="userAccessButton" type="button">
 <strong>Continue as user</strong>
 <span>Open the learning experience</span>
 </button>
 
-<div class="access-divider"><span>or</span></div>
 
-<button class="access-admin-toggle" id="adminAccessToggle" type="button" aria-controls="adminAccessForm" aria-expanded="false">
-Administrator sign in
-</button>
-
-<form class="access-admin-form" id="adminAccessForm" hidden>
-<label for="adminUsername">Username</label>
-<input id="adminUsername" name="username" type="text" autocomplete="username" autocapitalize="none" spellcheck="false">
-
-<label for="adminPassword">Password</label>
-<input id="adminPassword" name="password" type="password" autocomplete="current-password">
-
-<p class="access-error" id="accessError" role="alert" aria-live="polite"></p>
-<button class="access-submit" type="submit">Sign in as administrator</button>
-</form>
 </div>
 </section>
 
 <header class="site-header" aria-label="Line Logic navigation">
 <div class="site-header-inner">
-<a class="site-brand" href="./?home=1" aria-label="Line Logic home"><img src="assets/line-logic-icon.svg" alt=""><span class="site-brand-copy"><span class="site-brand-eyebrow">FOR WIZZ AIR UK</span><strong>LINE LOGIC</strong></span></a>
+<a class="site-brand" href="./?home=1" aria-label="Line Logic home"><img src="assets/line-logic-icon.svg?v=wizz1" alt=""><span class="site-brand-copy"><span class="site-brand-eyebrow">FOR WIZZ AIR UK</span><strong>LINE LOGIC</strong></span></a>
 <div class="site-header-actions"><div class="site-session-slot"></div><a class="site-home-link" href="./?home=1" title="Line Logic home"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 10 9-7 9 7v10a1 1 0 0 1-1 1h-5v-8H9v8H4a1 1 0 0 1-1-1Z"/></svg><span>Home</span></a></div>
 </div>
 </header>
 
+
 <main class="home-shell" id="home">
-<header class="home-header">
+<div class="menu-introduction"><header class="home-header">
 
 <p class="home-kicker">TRAINING MODES</p>
 <h1>How would you like to begin?</h1>
 <p class="home-intro">Choose a route through the Line Logic learning experience.</p>
-</header>
+</header><figure class="wizz-artwork" aria-label="Abstract Line Logic artwork for Wizz Air UK"><svg viewBox="0 0 600 360" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><rect width="600" height="360" fill="#c6007e"/><path d="M90 -220 H232 L80 255 H340 L297 391 H-103 Z" fill="#e87db3"/><path d="M449 -82 H577 L417 412 H708 L666 548 H245 Z" fill="#fff4f9"/><path d="M-60 236 H660 M367 -340 L120 430" stroke="#fff" stroke-opacity=".28" stroke-width="1"/><circle cx="182" cy="236" r="5" fill="#fff4f9"/></svg></figure></div>
 
 <nav class="mode-grid" aria-label="Line Logic learning modes">
 <a class="mode-card mode-card-guided" href="guided.html">
-<span class="mode-number">01</span>
-<img class="mode-icon" src="assets/guided-route.png" alt="" aria-hidden="true">
 <span class="mode-name">Guided line scenarios</span>
+<svg class="mode-icon" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80" fill="none">
+<path d="M13 65 35 39 67 15" stroke="#aaa5aa" stroke-width="1.5" stroke-linecap="round"/>
+<path d="M13 59 18.2 68H7.8ZM35 33 40.2 42H29.8ZM67 9 72.2 18H61.8Z" fill="#fff" stroke="#c6007e" stroke-width="1.7"/>
+<g id="guidedAircraft" transform="translate(51 27) rotate(53.1)">
+<path d="M0-9C-1-9-1.2-7-1.2-6V-2L-7 2V3.5L-1.2 1.5V5L-3.5 7V8L0 7 3.5 8V7L1.2 5V1.5L7 3.5V2L1.2-2V-6C1.2-7 1-9 0-9Z" fill="#414147" stroke="#fff" stroke-width=".8" stroke-linejoin="round"/>
+</g>
+</svg>
 <span class="mode-description">Follow a complete operational scenario and make decisions as the flight develops.</span>
-<span class="mode-arrow" aria-hidden="true">→</span>
+<span class="mode-arrow" aria-hidden="true">Open <span>→</span></span>
 </a>
 
 <a class="mode-card mode-card-quiz" href="https://line-logic-pop-quiz.addotbradford.workers.dev/">
-<span class="mode-number">02</span>
-<img class="mode-icon" src="assets/pop-quiz.png" alt="" aria-hidden="true">
 <span class="mode-name">Pop quiz mode</span>
+<svg class="mode-icon" aria-hidden="true" viewBox="0 0 80 80" fill="none">
+<g class="quiz-choice quiz-choice-one"><circle cx="13" cy="22" r="4.5"/><circle class="quiz-choice-dot" cx="13" cy="22" r="2"/><path d="M25 22H55"/></g>
+<g class="quiz-choice quiz-choice-two"><circle cx="13" cy="40" r="4.5"/><circle class="quiz-choice-dot" cx="13" cy="40" r="2"/><path d="M25 40H55"/></g>
+<g class="quiz-choice quiz-choice-three"><circle cx="13" cy="58" r="4.5"/><circle class="quiz-choice-dot" cx="13" cy="58" r="2"/><path d="M25 58H55"/></g>
+<path class="quiz-tick" d="m62 40 4 4 8-9" pathLength="1"/>
+</svg>
 <span class="mode-description">Test your knowledge through short, focused questions.</span>
-<span class="mode-arrow" aria-hidden="true">→</span>
+<span class="mode-arrow" aria-hidden="true">Open <span>→</span></span>
 </a>
 
 <a class="mode-card mode-card-topics" href="topics.html">
-<span class="mode-number">03</span>
-<img class="mode-icon" src="assets/topic-search-icon.svg" alt="" aria-hidden="true">
 <span class="mode-name">Topic search</span>
+<svg class="mode-icon" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80" fill="none">
+<path d="M48 69H21A5 5 0 0 1 16 64V14A5 5 0 0 1 21 9H46L59 22V36M46 9V22H59" stroke="#aaa5aa" stroke-width="1.5" stroke-linejoin="round"/>
+<path d="M26 29H47M26 39H40M26 49H35" stroke="#aaa5aa" stroke-width="1.5" stroke-linecap="round"/>
+<g class="topic-magnifier">
+<circle cx="51" cy="51" r="11" stroke="#c6007e" stroke-width="2"/>
+<path d="M59 59 69 69" stroke="#c6007e" stroke-width="2.6" stroke-linecap="round"/>
+</g>
+</svg>
 <span class="mode-description">Find all learning material of a single topic, in one place.</span>
-<span class="mode-arrow" aria-hidden="true">→</span>
+<span class="mode-arrow" aria-hidden="true">Open <span>→</span></span>
 </a>
 </nav>
+<footer class="wizz-footer"><span class="wizz-footer-label">WIZZ AIR UK</span><span>Guidance material for Wizz Air UK crews</span><span class="wizz-footer-copyright">© Line Logic 2026</span></footer>
 </main>
 
-<script src="access.js?v=20260910-1"></script>
-<script src="landing.js?v=20260906-3"></script>
+<script src="access.js"></script>
+<script src="landing.js"></script>
+<script src="guided-icon.js"></script>
 </body>
 </html>

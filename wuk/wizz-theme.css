@@ -1,0 +1,72 @@
+/* Shared Wizz accents for the local training preview. */
+:root{--ll-pink:#c6007e;--pink:#c6007e;--ll-purple:#414147;--purple:#414147}
+.site-brand-eyebrow,.home-kicker{color:#c6007e}
+.site-home-link,.back-link{border-color:#e5bfd5;color:#8e005a;background:#fff}
+.site-home-link:hover,.back-link:hover{border-color:#c6007e;color:#c6007e;background:#fff0f7}
+.site-home-link:focus-visible,.back-link:focus-visible,.mode-card:focus-visible,.card:focus-visible,button:focus-visible{outline:2px solid #c6007e;outline-offset:4px}
+.mode-card::before{background:#c6007e;height:3px}
+.mode-card:hover,.mode-card:focus-visible{border-color:#d363a4;box-shadow:0 16px 38px rgba(108,23,77,.1)}
+.mode-arrow{color:#c6007e}
+.mode-card:hover .mode-arrow{color:#9e0065}
+.access-button-primary,.explore{background:#c6007e;color:#fff}
+.access-button-primary:hover,.explore:not(:disabled):hover{background:#a8006b}
+.chip,.comp .tag{color:#8e005a;background:#fceaf4}
+.menu label:hover,.menu label:has(input:checked){background:#fff0f7}
+.card:hover{border-color:#d363a4;box-shadow:0 8px 22px rgba(108,23,77,.08)}
+.open,.search span{color:#c6007e}
+
+.wizz-footer{display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin-top:34px;padding-top:20px;border-top:1px solid #e9e2e7;color:#777078;font-size:12px;line-height:1.5}
+.wizz-footer-label{color:#c6007e;font-size:11px;font-weight:800;letter-spacing:.12em}
+.wizz-footer-copyright{margin-left:auto}
+@media(max-width:600px){.wizz-footer{gap:8px 14px}.wizz-footer-copyright{margin-left:0;width:100%}}
+
+.mode-number{margin-bottom:18px}.mode-name{margin-top:0}.mode-icon{margin-top:22px;margin-bottom:20px}.mode-description{margin-top:0}
+
+.mode-card::before{display:none}
+.mode-name{margin:0;color:var(--ll-ink);font-size:19px;line-height:1.25}
+
+.mode-card-guided .mode-icon{width:100px;height:100px}
+
+/* Visible action within each clickable training card. */
+.mode-card{padding-bottom:78px;cursor:pointer}
+.mode-arrow{display:inline-flex;align-items:center;gap:12px;width:auto;height:auto;padding:9px 15px;border:1px solid #e2b2cd;border-radius:999px;background:#fff5fa;color:#a10067;font-size:13px;font-weight:700;line-height:1.2;transition:background 180ms ease,color 180ms ease,border-color 180ms ease}
+.mode-arrow span{font-size:18px}
+.mode-card:hover,.mode-card:focus-visible{border-color:#c6007e}
+.mode-card:hover .mode-arrow,.mode-card:focus-visible .mode-arrow{transform:none;background:#c6007e;border-color:#c6007e;color:#fff}
+
+.mode-card-guided .mode-icon{width:180px;height:100px;max-width:100%;object-fit:contain}
+
+
+/* Larger route illustration, with all card details visible. */
+.mode-card-guided .mode-icon{width:230px;height:auto;aspect-ratio:144/80;max-width:100%;object-fit:contain;align-self:center;margin-top:24px;margin-bottom:24px}
+
+.mode-card-guided .mode-icon{width:100px;height:100px;aspect-ratio:1;align-self:flex-start;object-fit:contain}
+
+/* Soft full-card feedback for mouse and keyboard selection. */
+.mode-card{transition:transform 180ms ease,border-color 180ms ease,box-shadow 180ms ease,background-color 180ms ease}
+.mode-card:hover,.mode-card:focus-visible{background:#fff2f8;border-color:#c6007e}
+@media(prefers-reduced-motion:reduce){.mode-card{transition:none}}
+
+.mode-card-quiz .mode-icon{width:100px;height:100px;object-fit:contain}
+
+.mode-card-topics .mode-icon{width:100px;height:100px;object-fit:contain}
+
+.mode-card-topics:hover .topic-magnifier,.mode-card-topics:focus-visible .topic-magnifier{animation:topic-search-scan 550ms ease-in-out}
+@keyframes topic-search-scan{0%,100%{transform:translate(0,0)}45%{transform:translate(-4px,-3px)}75%{transform:translate(2px,-1px)}}
+@media(prefers-reduced-motion:reduce){.mode-card-topics:hover .topic-magnifier,.mode-card-topics:focus-visible .topic-magnifier{animation:none}}
+
+.quiz-choice{color:#aaa5aa;stroke:currentColor;stroke-width:1.5;stroke-linecap:round}
+.quiz-choice-dot{fill:currentColor;stroke:none;opacity:0}
+.quiz-choice-two{color:#244d73}.quiz-choice-two .quiz-choice-dot{opacity:1}
+.quiz-tick{stroke:#328354;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:1;stroke-dashoffset:1}
+.mode-card-quiz:is(:hover,:focus-visible) .quiz-choice-one{animation:quiz-first 900ms linear forwards}
+.mode-card-quiz:is(:hover,:focus-visible) .quiz-choice-two{animation:quiz-second 900ms linear forwards}
+.mode-card-quiz:is(:hover,:focus-visible) .quiz-choice-one .quiz-choice-dot{animation:quiz-first-dot 900ms linear forwards}
+.mode-card-quiz:is(:hover,:focus-visible) .quiz-choice-two .quiz-choice-dot{animation:quiz-second-dot 900ms linear forwards}
+.mode-card-quiz:is(:hover,:focus-visible) .quiz-tick{animation:quiz-confirm 900ms ease forwards}
+@keyframes quiz-first{0%,32%{color:#244d73}40%,100%{color:#aaa5aa}}
+@keyframes quiz-second{0%,32%{color:#aaa5aa}40%,100%{color:#244d73}}
+@keyframes quiz-first-dot{0%,32%{opacity:1}40%,100%{opacity:0}}
+@keyframes quiz-second-dot{0%,32%{opacity:0}40%,100%{opacity:1}}
+@keyframes quiz-confirm{0%,65%{stroke-dashoffset:1}100%{stroke-dashoffset:0}}
+@media(prefers-reduced-motion:reduce){.mode-card-quiz:is(:hover,:focus-visible) .quiz-choice,.mode-card-quiz:is(:hover,:focus-visible) .quiz-choice-dot,.mode-card-quiz:is(:hover,:focus-visible) .quiz-tick{animation:none}.mode-card-quiz:is(:hover,:focus-visible) .quiz-tick{stroke-dashoffset:0}}

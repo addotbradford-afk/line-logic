@@ -1,17 +1,11 @@
 (function () {
   "use strict";
 
-  const roleKey = "lineLogicRole";
+  const roleKey = "lineLogicWizzPreviewRole";
   const validRoles = new Set(["user", "admin"]);
-  const adminPasswordHash = "d1fe1c13";
 
   const accessOverlay = document.getElementById("accessOverlay");
   const userAccessButton = document.getElementById("userAccessButton");
-  const adminAccessToggle = document.getElementById("adminAccessToggle");
-  const adminAccessForm = document.getElementById("adminAccessForm");
-  const adminUsername = document.getElementById("adminUsername");
-  const adminPassword = document.getElementById("adminPassword");
-  const accessError = document.getElementById("accessError");
 
   function readRole() {
     try {
@@ -36,17 +30,6 @@
     } catch (error) {
       // Reloading still returns the visitor to the access screen.
     }
-  }
-
-  function hashAccessCode(value) {
-    let hash = 2166136261;
-
-    for (let index = 0; index < value.length; index += 1) {
-      hash ^= value.charCodeAt(index);
-      hash = Math.imul(hash, 16777619);
-    }
-
-    return (hash >>> 0).toString(16).padStart(8, "0");
   }
 
   function mountSessionControl(role) {
@@ -88,6 +71,7 @@
   function completeAccess(role) {
     writeRole(role);
     unlockSite(role);
+    window.dispatchEvent(new CustomEvent("lineLogicAccessGranted"));
   }
 
   function showAccessOverlay() {
@@ -132,39 +116,8 @@
     completeAccess("user");
   });
 
-  adminAccessToggle.addEventListener("click", function () {
-    const willOpen = adminAccessForm.hidden;
-    adminAccessForm.hidden = !willOpen;
-    adminAccessToggle.setAttribute("aria-expanded", String(willOpen));
-    accessError.textContent = "";
-
-    if (willOpen) adminUsername.focus();
+  showAccessOverlay();
+  if (currentRole) window.requestAnimationFrame(function () {
+    window.dispatchEvent(new CustomEvent("lineLogicAccessGranted"));
   });
-
-  adminAccessForm.addEventListener("submit", function (event) {
-    event.preventDefault();
-
-    const usernameMatches =
-      adminUsername.value.trim().toLowerCase() === "admin";
-
-    const passwordMatches =
-      hashAccessCode(adminPassword.value) === adminPasswordHash;
-
-    if (!usernameMatches || !passwordMatches) {
-      accessError.textContent = "The administrator details do not match.";
-      adminPassword.select();
-      return;
-    }
-
-    accessError.textContent = "";
-    adminAccessForm.reset();
-    completeAccess("admin");
-  });
-
-  window.addEventListener("lineLogicLandingComplete", showAccessOverlay);
-
-  if (document.documentElement.classList.contains("skip-landing")) {
-    window.requestAnimationFrame(showAccessOverlay);
-  }
 })();
-

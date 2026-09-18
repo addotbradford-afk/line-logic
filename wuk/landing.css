@@ -629,3 +629,14 @@ body {
     transition: none;
   }
 }
+
+[hidden]{display:none!important}.landing{display:grid;place-items:center}.landing iframe{width:100%;height:100%;border:0;background:white}.landing #skipWizzIntro{position:absolute;bottom:24px;right:24px;padding:12px 20px;border:1px solid #ddd;border-radius:999px;background:white;color:#333;cursor:pointer}.wuk-intro-playing>.site-header,.wuk-intro-playing>.home-shell{visibility:hidden}.wuk-intro-playing .session-control{visibility:hidden}
+
+.landing{transition:opacity 600ms cubic-bezier(.22,1,.36,1)}@media(prefers-reduced-motion:reduce){.landing{transition:none}}
+
+/* Compact artwork beside the menu heading. */
+.menu-introduction{display:grid;grid-template-columns:minmax(0,1fr) minmax(220px,300px);align-items:center;gap:64px;margin-bottom:40px}
+.menu-introduction .home-header{margin-bottom:0}
+.wizz-artwork{margin:0;overflow:hidden;border-radius:16px;aspect-ratio:5/3}
+.wizz-artwork svg{display:block;width:100%;height:100%}
+@media(max-width:800px){.menu-introduction{grid-template-columns:1fr;gap:28px;margin-bottom:32px}.wizz-artwork{width:min(300px,100%)} }

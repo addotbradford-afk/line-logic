@@ -16,4 +16,3 @@
 @media(max-width:600px){.site-header{padding:0 20px}.site-header-inner{height:82px;gap:12px}.site-header-actions{gap:12px}.site-home-link{min-height:44px;padding:8px 10px}.home-page .home-shell{min-height:calc(100dvh - 82px)}}
 @media(max-width:520px){.site-header:has(.site-session-slot .session-control){padding-bottom:44px}.site-session-slot{position:absolute;top:90px;right:0}.site-session-slot .session-control{min-height:32px;padding:2px 4px 2px 10px}.home-page:has(.site-session-slot .session-control) .home-shell{min-height:calc(100dvh - 126px)}}
 @media(prefers-reduced-motion:reduce){.site-home-link{transition:none}}
-
