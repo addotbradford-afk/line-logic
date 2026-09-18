@@ -1,4 +1,9 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8"><title>Line Logic account status</title></head><body><script>
+window.addEventListener('message',async event=>{
+ if(event.origin!=='https://line-logic-pop-quiz.addotbradford.workers.dev'||event.source!==window.parent||event.data?.type!=='saveSoloProgress')return;
+ const eventId=event.data.eventId;if(typeof eventId!=='string')return;
+ try{const token=sessionStorage.getItem('lineLogicWukMasterToken');if(!token)throw new Error('Sign in to save this result.');const response=await fetch('https://line-logic-pop-quiz.addotbradford.workers.dev/api/progress',{method:'POST',headers:{Authorization:'Bearer '+token,'Content-Type':'application/json'},body:JSON.stringify({kind:'solo',eventId,quizId:event.data.quizId,answers:event.data.answers})});const data=await response.json();if(!response.ok)throw new Error(data.error||'Unable to save this result.');window.parent.postMessage({type:'soloProgressSaved',eventId,saved:true},event.origin);}catch(error){window.parent.postMessage({type:'soloProgressSaved',eventId,saved:false,error:error.message||'Unable to save this result.'},event.origin);}
+});
 (async function(){
 const receiver='https://line-logic-pop-quiz.addotbradford.workers.dev';
 if(window.parent===window)return;

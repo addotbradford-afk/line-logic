@@ -25,7 +25,7 @@ function render(){
 function openModal(id){
  const s=scenarios.find(item=>item.id===id);if(!s)return;previousFocus=document.activeElement;
  const hasUrl=typeof s.url==="string"&&s.url.trim();
- const explore=hasUrl?`<a class="explore" href="${esc(s.url)}" target="_top">EXPLORE SCENARIO <span>→</span></a>`:`<button class="explore" type="button" disabled>EXPLORE SCENARIO <span class="pending">LINK COMING SOON</span></button>`;
+ const explore=hasUrl?`<a class="explore" data-scenario-id="${esc(s.id)}" href="${esc(s.url)}" target="_top">EXPLORE SCENARIO <span>→</span></a>`:`<button class="explore" type="button" disabled>EXPLORE SCENARIO <span class="pending">LINK COMING SOON</span></button>`;
  modalContent.innerHTML=`<div class="id">${esc(s.id)}</div><div class="title" id="modal-title">${esc(s.title)}</div><div class="loc">${esc(s.location||"")}</div>${dots(s.complexity)}<p class="modal-overview">${esc(s.overview||"")}</p><div class="section-label">OPERATIONAL FOCUS</div><div class="tags">${(s.focus||[]).map(t=>`<span class="tag">${esc(t)}</span>`).join("")}</div><div class="details-grid"><div><div class="section-label">PILOT COMPETENCIES</div><div class="tags comp">${(s.competencies||[]).map(t=>`<span class="tag">${esc(t)}</span>`).join("")}</div></div><div><div class="section-label">SAFETY DATA</div><div class="detail-value">${esc(s.safetyData||"Not specified")}</div></div></div>${explore}`;
  modal.hidden=false;document.body.classList.add("modal-open");modalCard.focus();
 }
