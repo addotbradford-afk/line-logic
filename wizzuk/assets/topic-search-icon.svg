@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-label="Notepad with magnifying glass">
+  <g fill="none" stroke="#071d38" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="42" y="35" width="137" height="177" rx="18" stroke-width="14"/>
+    <path d="M75 24v29M110 24v29M145 24v29" stroke-width="13"/>
+    <path d="M72 87h77M72 119h54M72 151h36" stroke-width="11"/>
+    <circle cx="166" cy="158" r="40" fill="#fff" stroke-width="14"/>
+    <path d="m194 187 29 29" stroke-width="17"/>
+  </g>
+  <path d="M151 143a22 22 0 0 1 28-2" fill="none" stroke="#6da8ff" stroke-linecap="round" stroke-width="8"/>
+</svg>

@@ -1,0 +1,40 @@
+name: Refresh Luton METAR
+on:
+  push:
+    paths:
+      - '.github/workflows/metar.yml'
+  schedule:
+    - cron: '7,37 * * * *'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Read latest NOAA METAR
+        run: |
+          python3 - <<'PY'
+          import urllib.request, json
+          from pathlib import Path
+          request = urllib.request.Request('https://tgftp.nws.noaa.gov/data/observations/metar/stations/EGGW.TXT', headers={'User-Agent': 'LineLogicWeather/1.0'})
+          with urllib.request.urlopen(request, timeout=30) as response:
+              lines = response.read().decode().strip().splitlines()
+          if len(lines) < 2 or not lines[1].startswith('EGGW '):
+              raise ValueError('Unexpected METAR response')
+          Path('weather.json').write_text(json.dumps({'station':'EGGW', 'observedAt':lines[0].replace('/','-').replace(' ','T')+':00Z', 'metar':lines[1]}))
+          PY
+      - name: Save updated report
+        run: |
+          if ! git diff --quiet -- weather.json; then
+            git config user.name 'Line Logic weather'
+            git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+            git add weather.json
+            git commit -m 'Refresh Luton METAR'
+            git push
+          fi
+      - name: Request Pages rebuild
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh api --method POST repos/${{ github.repository }}/pages/builds
