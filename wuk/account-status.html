@@ -1,0 +1,9 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><title>Line Logic account status</title></head><body><script>
+(async function(){
+const receiver='https://line-logic-pop-quiz.addotbradford.workers.dev';
+if(window.parent===window)return;
+let signedIn=false;
+try{const token=sessionStorage.getItem('lineLogicWukMasterToken');if(token){const response=await fetch('https://aavinfwtnbwforbkgrzh.supabase.co/auth/v1/user',{headers:{apikey:'sb_publishable_Ot5qtj32uOZWxY9Z4G6T2g_jXmXi2il',Authorization:'Bearer '+token}});if(response.ok){const user=await response.json();signedIn=!!user.id&&!!user.email_confirmed_at&&!user.is_anonymous;}}}catch{}
+window.parent.postMessage({type:'lineLogicAccountStatus',signedIn},receiver);
+})();
+</script></body></html>
