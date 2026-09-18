@@ -123,3 +123,7 @@ main{display:grid;grid-template-columns:1.1fr 1fr;gap:72px;align-items:center;ma
 #cover>footer{color:#68716f}
 
 #cover{background:linear-gradient(115deg,#fcfaf4 0%,#f4e7d8 40%,#ecc9ba 72%,#dea58f 100%)}
+
+/* Magenta artwork and a coordinating rose gradient — preview only. */
+.hero-monogram{background:#c6007e}
+#cover{background:linear-gradient(115deg,#fcfaf6 0%,#f5e8ee 40%,#edc9dc 72%,#dda1c3 100%)}
