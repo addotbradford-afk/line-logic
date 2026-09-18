@@ -5,7 +5,7 @@ const message=document.getElementById('setupMessage'),form=document.getElementBy
 const query=new URLSearchParams(location.search),linkHash=query.get('token_hash'),linkType=query.get('type');
 const recovery=params.get('type')==='recovery'||linkType==='recovery';
 let token=params.get('access_token');history.replaceState(null,'',location.pathname);
-async function request(url,options={}){const response=await fetch(url,{...options,headers:{apikey:KEY,Authorization:'Bearer '+token,'Content-Type':'application/json',...options.headers}});const data=await response.json();if(!response.ok)throw new Error(data.error||data.msg||data.message||'Unable to complete your request.');return data;}
+async function request(url,options={}){const response=await fetch(url,{...options,headers:{...(url.startsWith(AUTH)?{apikey:KEY}:{}),Authorization:'Bearer '+token,'Content-Type':'application/json',...options.headers}});const data=await response.json();if(!response.ok)throw new Error(data.error||data.msg||data.message||'Unable to complete your request.');return data;}
 async function openSetup(){try{
  if(!token)throw new Error('Open the setup link in your invitation email.');
  const user=await request(AUTH+'/user');if(!user.email_confirmed_at)throw new Error('Confirm your email before continuing.');
@@ -20,6 +20,14 @@ async function openSetup(){try{
   sessionStorage.removeItem('lineLogicWukMasterToken');sessionStorage.removeItem('lineLogicWizzPreviewRole');token=null;form.hidden=true;message.textContent='Your account is ready. Sign in with your email and new password.';login.hidden=false;login.textContent='Sign in to WUK';
  }catch(error){message.textContent=error.message||'Unable to save your account.';}finally{password.value='';confirm.value='';button.disabled=false;}};
 }catch(error){token=null;message.textContent=error.message||'Unable to verify your invitation.';login.hidden=false;document.getElementById('requestSetupForm').hidden=false;}}
-if(linkHash&&['email','invite','recovery'].includes(linkType)){const verifyButton=document.getElementById('verifyInvitation');verifyButton.hidden=false;message.textContent='Your invitation is ready. Continue to verify your email and open registration.';verifyButton.onclick=async()=>{verifyButton.disabled=true;try{const response=await fetch(AUTH+'/verify',{method:'POST',headers:{apikey:KEY,'Content-Type':'application/json'},body:JSON.stringify({token_hash:linkHash,type:linkType})});const result=await response.json();if(!response.ok||!result.access_token)throw new Error('This invitation has expired or has already been used. Request a new invitation below.');token=result.access_token;verifyButton.hidden=true;await openSetup();}catch(error){message.textContent=error.message;document.getElementById('requestSetupForm').hidden=false;}finally{verifyButton.disabled=false;}};}else{await openSetup();}
+if(linkHash&&['email','invite','recovery'].includes(linkType)){
+ message.textContent='Checking your invitation…';
+ try{
+  const response=await fetch(AUTH+'/verify',{method:'POST',headers:{apikey:KEY,'Content-Type':'application/json'},body:JSON.stringify({token_hash:linkHash,type:linkType})});
+  const result=await response.json();
+  if(!response.ok||!result.access_token)throw new Error('This invitation has expired or has already been used. Request a new invitation below.');
+  token=result.access_token;await openSetup();
+ }catch(error){message.textContent=error.message||'Unable to verify your invitation.';document.getElementById('requestSetupForm').hidden=false;login.hidden=false;}
+}else{await openSetup();}
 const resend=document.getElementById('requestSetupForm');resend.onsubmit=async event=>{event.preventDefault();const button=resend.querySelector('button');button.disabled=true;try{const response=await fetch(AUTH+'/otp?redirect_to='+encodeURIComponent('https://linelogic.uk/?home=1'),{method:'POST',headers:{apikey:KEY,'Content-Type':'application/json'},body:JSON.stringify({email:document.getElementById('requestSetupEmail').value.trim(),create_user:false})});if(!response.ok)throw new Error('Unable to send a new link. Please wait a moment and try again.');message.textContent='Check your inbox for a fresh setup link. Use the newest email.';}catch(error){message.textContent=error.message;}finally{button.disabled=false;}};
 })();
