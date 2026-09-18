@@ -136,3 +136,19 @@ main{display:grid;grid-template-columns:1.1fr 1fr;gap:72px;align-items:center;ma
 #homeLink:focus-visible,#signIn:focus-visible{outline:3px solid #e5007d;outline-offset:4px}
 @media(max-width:600px){#homeLink,#signIn{min-height:44px;padding:8px 10px}#cover nav{gap:8px}}
 @media(prefers-reduced-motion:reduce){#homeLink,#signIn{transition:none}}
+
+/* Neutral page with pink retained only in the artwork. */
+html,body,#cover{background:#f7f4ed}
+
+/* Ivory to blue-grey gradient — preview only. */
+#cover{background:linear-gradient(115deg,#fcfaf4 0%,#eeefec 40%,#d5e0e5 72%,#b7cad5 100%)}
+
+/* Monochrome LL artwork, retaining the blue-grey page gradient. */
+.hero-monogram{background:#292929}
+
+.hero-monogram{background:#484c50}
+
+/* Inverted artwork — preview only. */
+.hero-monogram{background:#b7b3af}
+
+.hero-monogram{background:#484c50}
