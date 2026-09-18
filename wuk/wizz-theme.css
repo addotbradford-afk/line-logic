@@ -73,5 +73,6 @@
 
 .home-header h1:focus{outline:none}
 
-.menu-introduction{margin-bottom:58px}
-@media(max-width:800px){.menu-introduction{margin-bottom:50px}}
+.menu-introduction{margin-bottom:78px}
+@media(max-width:800px){.menu-introduction{margin-bottom:70px}}
+
