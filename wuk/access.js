@@ -71,7 +71,7 @@
   function completeAccess(role) {
     writeRole(role);
     unlockSite(role);
-    window.dispatchEvent(new CustomEvent("lineLogicAccessGranted"));
+    window.dispatchEvent(new CustomEvent("lineLogicAccessGranted", { detail: { freshLogin: true } }));
   }
 
   function showAccessOverlay() {
@@ -118,6 +118,6 @@
 
   showAccessOverlay();
   if (currentRole) window.requestAnimationFrame(function () {
-    window.dispatchEvent(new CustomEvent("lineLogicAccessGranted"));
+    window.dispatchEvent(new CustomEvent("lineLogicAccessGranted", { detail: { freshLogin: false } }));
   });
 })();

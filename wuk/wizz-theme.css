@@ -70,3 +70,5 @@
 @keyframes quiz-second-dot{0%,32%{opacity:0}40%,100%{opacity:1}}
 @keyframes quiz-confirm{0%,65%{stroke-dashoffset:1}100%{stroke-dashoffset:0}}
 @media(prefers-reduced-motion:reduce){.mode-card-quiz:is(:hover,:focus-visible) .quiz-choice,.mode-card-quiz:is(:hover,:focus-visible) .quiz-choice-dot,.mode-card-quiz:is(:hover,:focus-visible) .quiz-tick{animation:none}.mode-card-quiz:is(:hover,:focus-visible) .quiz-tick{stroke-dashoffset:0}}
+
+.home-header h1:focus{outline:none}
