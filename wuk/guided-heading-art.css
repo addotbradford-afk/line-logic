@@ -1,0 +1,5 @@
+/* A wider route illustration for the scenarios dashboard. */
+.guided-page .guided-heading{padding-right:250px;min-height:130px}
+.guided-page .guided-heading-icon{right:0;top:-3px;width:230px;height:138px;object-fit:contain}
+@media(max-width:700px){.guided-page .guided-heading{padding-right:170px;min-height:110px}.guided-page .guided-heading-icon{top:0;width:155px;height:104px}}
+@media(max-width:480px){.guided-page .guided-heading{padding-right:120px;min-height:96px}.guided-page .guided-heading-icon{width:112px;height:84px}}
