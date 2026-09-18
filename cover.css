@@ -189,3 +189,5 @@ html,body,#cover{background:#f7f4ed}
 @media(prefers-reduced-motion:reduce){.hero-monogram svg>rect,.hero-monogram .monogram-back{animation:none}.hero-monogram svg>rect{fill:#e76f51}.hero-monogram .monogram-back{fill:#f2b7a4}}
 
 .operation-promise{margin:24px 0 0;color:#484c50;font-size:14px;font-weight:600;letter-spacing:.3px}
+
+[hidden]{display:none!important}.account-secondary{display:block;margin:20px auto 0;border:0;background:none;color:#647988;font-size:13px;text-decoration:underline;text-underline-offset:4px}
