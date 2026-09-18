@@ -76,3 +76,7 @@
 .menu-introduction{margin-bottom:78px}
 @media(max-width:800px){.menu-introduction{margin-bottom:70px}}
 
+.menu-introduction .home-intro{margin-top:32px}
+.menu-introduction{grid-template-columns:minmax(0,1fr) minmax(260px,350px);gap:48px}
+@media(max-width:800px){.menu-introduction{grid-template-columns:1fr;gap:28px}.wizz-artwork{width:min(350px,100%)}}
+
