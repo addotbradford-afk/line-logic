@@ -3,62 +3,62 @@
     "EGLL": {
       "name": "Heathrow",
       "station": "EGLL",
-      "observedAt": "2026-09-19T09:20:00Z",
-      "metar": "EGLL 190920Z AUTO 24016KT 9999 FEW030 20/13 Q1015"
+      "observedAt": "2026-09-19T12:50:00Z",
+      "metar": "EGLL 191250Z AUTO 24021KT 9999 BKN032 22/14 Q1015"
     },
     "EGKK": {
       "name": "Gatwick",
       "station": "EGKK",
-      "observedAt": "2026-09-19T09:20:00Z",
-      "metar": "EGKK 190920Z 23013KT 190V260 9999 FEW026 19/14 Q1016"
+      "observedAt": "2026-09-19T12:50:00Z",
+      "metar": "EGKK 191250Z 23013KT 9999 SCT024 BKN030 21/15 Q1017"
     },
     "EGCC": {
       "name": "Manchester",
       "station": "EGCC",
-      "observedAt": "2026-09-19T09:20:00Z",
-      "metar": "EGCC 190920Z AUTO 24014KT 9999 BKN021/// BKN035/// //////TCU 19/15 Q1009"
+      "observedAt": "2026-09-19T12:50:00Z",
+      "metar": "EGCC 191250Z 27015KT 9999 SCT032 18/11 Q1012"
     },
     "EGSS": {
       "name": "Stansted",
       "station": "EGSS",
-      "observedAt": "2026-09-19T09:20:00Z",
-      "metar": "EGSS 190920Z AUTO 24015KT 9999 OVC020 19/14 Q1014"
+      "observedAt": "2026-09-19T12:50:00Z",
+      "metar": "EGSS 191250Z AUTO 23017KT 9999 BKN029 22/15 Q1015"
     },
     "EGGW": {
       "name": "Luton",
       "station": "EGGW",
-      "observedAt": "2026-09-19T09:20:00Z",
-      "metar": "EGGW 190920Z AUTO 23013KT 9999 OVC018 17/14 Q1014"
+      "observedAt": "2026-09-19T12:50:00Z",
+      "metar": "EGGW 191250Z AUTO 23016KT 9999 BKN025 20/15 Q1014"
     },
     "EGBB": {
       "name": "Birmingham",
       "station": "EGBB",
-      "observedAt": "2026-09-19T09:20:00Z",
-      "metar": "EGBB 190920Z 21009G19KT 160V250 9999 BKN013 18/15 Q1011"
+      "observedAt": "2026-09-19T12:50:00Z",
+      "metar": "EGBB 191250Z 26010KT 220V310 9999 FEW020 BKN031 20/16 Q1013 RERA"
     },
     "EGPH": {
       "name": "Edinburgh",
       "station": "EGPH",
-      "observedAt": "2026-09-19T09:20:00Z",
-      "metar": "EGPH 190920Z 25017KT 9999 FEW019 BKN043 13/10 Q1002"
+      "observedAt": "2026-09-19T12:50:00Z",
+      "metar": "EGPH 191250Z 26020G30KT 9999 FEW034 16/08 Q1004"
     },
     "EGPF": {
       "name": "Glasgow",
       "station": "EGPF",
-      "observedAt": "2026-09-19T09:20:00Z",
-      "metar": "EGPF 190920Z AUTO 23012KT 9999 -RA BKN018/// //////TCU 13/11 Q1003"
+      "observedAt": "2026-09-19T12:50:00Z",
+      "metar": "EGPF 191250Z AUTO 24021KT 9999 FEW031/// //////CB 16/10 Q1006"
     },
     "EGGD": {
       "name": "Bristol",
       "station": "EGGD",
-      "observedAt": "2026-09-19T09:20:00Z",
-      "metar": "EGGD 190920Z AUTO 22011KT 9999 OVC007 16/15 Q1015"
+      "observedAt": "2026-09-19T12:50:00Z",
+      "metar": "EGGD 191250Z 27015KT 1300 R27/P1500N -RA BKN003 17/17 Q1017 RERA"
     },
     "EGAA": {
       "name": "Belfast International",
       "station": "EGAA",
-      "observedAt": "2026-09-19T09:20:00Z",
-      "metar": "EGAA 190920Z AUTO 26020KT 9999 FEW026 BKN037 14/10 Q1006"
+      "observedAt": "2026-09-19T12:50:00Z",
+      "metar": "EGAA 191250Z AUTO 26021KT 9999 SCT035 SCT047 15/09 Q1009"
     }
   }
 }
